@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9 mai 2017, 15:46:34
+    Author     : DINHM_INFO
+*/
+#title{
+    margin-top: 1cm;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+nav{
+    alignment-adjust: c;
+    background-color: black;
+    height: auto;
+    width: 411px;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    height: 30px;
+}
+
+li{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+li a{
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    height: 20px;
+}
+
+li a:hover{
+    background-color: #91FF6F;
+    color:black;
+}
+
+.active{
+    background-color: #91FF6F;
+    color: black;
+}
+
+#content{
+    width: 600px;
+    height: 500px;
+    background-color: wheat;
+}

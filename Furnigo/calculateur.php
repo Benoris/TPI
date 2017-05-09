@@ -12,18 +12,15 @@ and open the template in the editor.
     </head>
     <body>
         <div id="title"><center><h1>Furnigo</h1></center></div>
+    <center>
         <nav>
             <ul>
-                <li><a href="index.php" class="active">Accueil</a></li>
+                <li><a href="index.php">Accueil</a></li>
                 <li><a href="login.php">Connexion</a></li>
                 <li><a href="inscription.php">S'inscrire</a></li>
-                <li><a href="calculateur.php">Calculateur de devis</a></li>
+                <li><a href="calculateur.php" class="active">Calculateur de devis</a></li>
             </ul>
         </nav>
-    <center>
-        <div id="content">
-            
-        </div>
     </center>
         <?php
         // put your code here
