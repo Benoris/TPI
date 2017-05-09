@@ -11,19 +11,23 @@ and open the template in the editor.
         <title>Accueil</title>
     </head>
     <body>
-        <div id="title"><center><h1>Furnigo</h1></center></div>
     <center>
+        <div id="title"><h1>Furnigo</h1></div>
+    
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
-                <li><a href="login.php">Connexion</a></li>
+                <li><a href="connexion.php">Connexion</a></li>
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="calculateur.php" class="active">Calculateur de devis</a></li>
             </ul>
         </nav>
-    </center>
+        <div id="content">
+            
+        </div>
         <?php
         // put your code here
         ?>
+    </center>
     </body>
 </html>
