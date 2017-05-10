@@ -1,11 +1,8 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 9 mai 2017, 15:46:34
-    Author     : DINHM_INFO
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      style.css
+Description:Fichier css du site web Furnigo
 */
 #title{
     margin-top: 1cm;
@@ -18,7 +15,7 @@ nav{
     alignment-adjust: middle;
     background-color: black;
     height: 30px;
-    width: 500px;
+    width: 700px;
 }
 
 ul{
@@ -62,6 +59,7 @@ li a:hover{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80ffffff', endColorstr='#80ffffff',GradientType=0 ); /* IE6-9 */
 
     border: 2px solid black;
+    font-size: large;
 }
 body{
     background: url("../img/background.jpg") no-repeat center center fixed;
@@ -70,4 +68,10 @@ body{
 p{
     padding: 5px;
     text-align: justify;
+}
+input{
+    margin-left: 10px;
+}
+label{
+    text-align: right;
 }

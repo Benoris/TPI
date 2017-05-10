@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -8,24 +11,58 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>Accueil</title>
+        <link rel="icon" type="image/png" href="img/favicon.ico">
+        <title>Furnigo</title>
     </head>
     <body>
-        <center>
+    <center>
         <div id="title"><h1>Furnigo</h1></div>
-    
+
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="connexion.php">Connexion</a></li>
                 <li><a href="inscription.php" class="active">S'inscrire</a></li>
+                <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php">Calculateur de devis</a></li>
+                <?php if(isset($_SESSION['name'])){?>
+                <li><a href="logout.php">Déconnexion</a></li>
+                <?php } ?>
             </ul>
         </nav>
-        <div id="content">Content is here</div>
-        <?php
-        // put your code here
-        ?>
-        </center>
-    </body>
+        <div id="content">
+            <fieldset>
+                <legend>Inscription</legend>
+                <form action="adduser.php" method="post">
+                    <label for="mail">E-mail: </label><br/>
+                    <input type="email" name="mail" required=""><br/>
+                    <label for="pseudo">Pseudo: </label><br/>
+                    <input type="text" name="pseudo" required=""><br/>
+                    <label for="pwd">Mot de passe: </label><br/>
+                    <input type="password" name="pwd" id="password" required=""><br/>
+                    <label for="confirmpwd">Confirmez votre mot de passe:</label><br/>
+                    <input type="password" name="confirmpwd" id="confirm_password" required=""><br/>
+                    <input type="submit" name="send">
+                </form>
+            </fieldset>
+        </div>
+    </center>
+    <script type="text/javascript">
+
+        var password = document.getElementById("password")
+                , confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+
+    </script>
+</body>
 </html>
