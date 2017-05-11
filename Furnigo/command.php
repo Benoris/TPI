@@ -14,5 +14,12 @@ function GetForfait(){
     return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 function GetOptions(){
-    
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM t_options");
+    $sql->execute();
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+function GetQtTotal($quantite,$prix){
+    $total = $quantite * $prix;
+    return $total;
 }

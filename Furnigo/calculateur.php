@@ -2,6 +2,7 @@
 session_start();
 require_once 'command.php';
 $optionForfait = GetForfait();
+$options = GetOptions();
 ?>
 <!DOCTYPE html>
 <!--
@@ -34,16 +35,102 @@ and open the template in the editor.
         <div id="content">
             <label for="selforfait">Sélectionnez votre forfait: </label>
             <select name="selforfait">
-                <?php foreach($optionForfait as $forfait) : ?>
-                <option value="<?= $forfait['idForfait'] ?>"> <?= $forfait['Forfait'] ?></option><br>
-            <?php endforeach; ?>
-                
+                <?php foreach ($optionForfait as $forfait) : ?>
+                    <option value="<?= $forfait['idForfait'] ?>"> <?= $forfait['Forfait'] ?></option><br>
+                <?php endforeach; ?>
+
             </select>
             <br>
-                <?php foreach($optionForfait as $forfait) : ?>
-                <input type="number" name="<?= $forfait['idForfait'] ?>"><br>
-            <?php endforeach; ?>
+            <table border="1" width="100%">
+                <col style="width:8%">
+                <col style="width: 72%">
+                <col style="width: 5%">
+                <col style="width: 5%">
+                <col style="width: 10%">
+                <tr>
+                    <th>Quantité</th>
+                    <th>Description</th>
+                    <th>Supplément de base</th>
+                    <th>Prix au M3</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td colspan="5" style="text-align: center">Au départ: Préparation et conditionnement</td>
+                </tr>
+                <?php
+                $i = 0;
+                foreach ($options as $opt) :
+                    $i++;
+                    ?>
+                    <tr>
+                        <td style="text-align: center"><input type="number" value="0" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onchange="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
+                        <td><?= $opt['DescriptionDetaillee'] ?></td>
+                        <td style="text-align: center" id="supplement<?php echo $opt['idOption'] ?>"><?= $opt['PrixSupplementDeBase'] ?></td>
+                        <td style="text-align: center" id="pm3<?php echo $opt['idOption'] ?>"><?= $opt['PrixAuM3'] ?></td>
+                        <td style="text-align: center" id="total<?php echo $opt['idOption'] ?>">0</td>
+                    </tr>
+                    <?php
+                    if ($i == 11) {
+                        echo '<tr>
+                    <td colspan="5" style="text-align: center">Travaux spéciaux</td>
+                </tr>';
+                    } elseif ($i == 13) {
+                        echo '<tr>
+                    <td colspan="5" style="text-align: center">Manutention et transport de votre mobilier</td>
+                </tr>';
+                    } elseif ($i == 16) {
+                        echo '<tr>
+                    <td colspan="5" style="text-align: center">Vos pièces annexes</td>
+                </tr>';
+                    } elseif ($i == 18) {
+                        echo '<tr>
+                    <td colspan="5" style="text-align: center">A l’arrivée : détail des prestations</td>
+                </tr>';
+                    } elseif ($i == 26) {
+                        echo '<tr>
+                    <td colspan="5" style="text-align: center">Travaux en dérogation des conditions générales de vente</td>
+                </tr>';
+                    }
+                    ?>
+                <?php endforeach; ?>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>Total</td>
+                    <td id="totaldevis"></td>
+                </tr>
+            </table>
         </div>
+        <input type="hidden" value="" name="optionTotal">
     </center>
+    <script type="text/javascript">
+                function ShowResult(id) {
+                if (document.getElementById("qt" + id).value == ""){
+                    document.getElementById("qt" + id).value = "0";
+                }
+                let quantity = parseInt(document.getElementById("qt" + id).value);
+                        if (quantity != 0){
+                let unityPrice = parseInt(document.getElementById("pm3" + $id).textContent);
+                        let supplement = parseInt(document.getElementById("supplement" + id).textContent);
+                        //console.log(quantity + " " + unityPrice + " " + supplement)
+                        document.getElementById("total" + id).textContent = QtTotal(quantity, unityPrice, supplement).toString();
+                        console.log(CalculTotal().toString());
+                        document.getElementById("totaldevis").innerHTML = CalculTotal().toString();
+                }
+                else{
+                document.getElementById("total" + $id).textContent = "0";
+                }
+                }
+        function QtTotal(qt, unit, supp) {
+        return qt * unit + supp;
+        }
+        
+        function CalculTotal(){
+        var total = 0;
+                for (i = 0; i < 35; i++){
+        total += parseInt(document.getElementById("total" + i.toString()).textContent);
+        }
+        return total;
+        }
+    </script>
 </body>
 </html>

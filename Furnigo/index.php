@@ -1,4 +1,11 @@
 <?php
+/*
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      index.php
+Description:Fichier index (Accueil) du site web Furnigo
+Date:       10/05/2017
+ */
 if(!isset($_SESSION['name'])){
     session_start();
 }
