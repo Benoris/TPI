@@ -5,8 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 session_start();
+if($_SESSION['name'] != '') {
+
 
 // Détruit toutes les variables de session
 $_SESSION = array();
@@ -25,3 +26,8 @@ if (ini_get("session.use_cookies")) {
 // Finalement, on détruit la session.
 session_destroy();
 header("Location:index.php");
+}
+else if($_SESSION['name'] == ''){
+    header("Location:connexion.php?msg=2");
+    exit();
+}

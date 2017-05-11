@@ -1,5 +1,7 @@
-<?php 
+<?php
 session_start();
+require_once 'command.php';
+$optionForfait = GetForfait();
 ?>
 <!DOCTYPE html>
 <!--
@@ -16,7 +18,7 @@ and open the template in the editor.
     <body>
     <center>
         <div id="title"><h1>Furnigo</h1></div>
-    
+
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
@@ -24,17 +26,24 @@ and open the template in the editor.
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php" class="active">Calculateur de devis</a></li>
-                <?php if(isset($_SESSION['name'])){?>
-                <li><a href="logout.php">Déconnexion</a></li>
+                <?php if (isset($_SESSION['name'])) { ?>
+                    <li><a href="logout.php">Déconnexion</a></li>
                 <?php } ?>
             </ul>
         </nav>
         <div id="content">
-            
+            <label for="selforfait">Sélectionnez votre forfait: </label>
+            <select name="selforfait">
+                <?php foreach($optionForfait as $forfait) : ?>
+                <option value="<?= $forfait['idForfait'] ?>"> <?= $forfait['Forfait'] ?></option><br>
+            <?php endforeach; ?>
+                
+            </select>
+            <br>
+                <?php foreach($optionForfait as $forfait) : ?>
+                <input type="number" name="<?= $forfait['idForfait'] ?>"><br>
+            <?php endforeach; ?>
         </div>
-        <?php
-        // put your code here
-        ?>
     </center>
-    </body>
+</body>
 </html>

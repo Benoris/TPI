@@ -7,6 +7,7 @@
  */
 
 static $msg;
+
 function SetMessage($txtmsg){
     global $msg;
     $msg = $txtmsg;

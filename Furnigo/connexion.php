@@ -5,6 +5,9 @@ if(isset($_GET['msg'])){
     if($_GET['msg']==1){
         $msg = "Veuillez vous connecter pour accéder à cette page!";
     }
+    else if($_GET['msg']==2){
+        $msg = "Vous n'êtes pas connecté!";
+    }
 }
 ?>
 <!DOCTYPE html>
