@@ -5,6 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+if($_POST['optionTotal']!=0){
+    
+
 session_start();
 if (isset($_SESSION['name'])) {
     require_once 'quotation.php';
@@ -23,14 +26,25 @@ if (isset($_SESSION['name'])) {
     $idDevis = CreateQuotation($pricetotal,$totalm3,$idUser);
     if($idDevis != FALSE){
         
-    $request += "INSERT INTO r_ajouter (idDevis,idOption,M3) VALUES";
+    $request = "INSERT INTO r_ajouter (idDevis,idOption,M3) VALUES";
     for ($i = 1; $i <= $nbOption; $i++) {
-        $m3 = trim(filter_input(INPUT_POST, 'qt' . $i, FILTER_SANITIZE_NUMBER_INT));
-        $request += "(ajouterIdDevis," . $i . "," . $m3 . ")";
+        $m3 = $_POST['qtOption' . $i];
+        $request .= "($idDevis," . $i . "," . $m3 . ")";
+        if($i != $nbOption){
+            $request .= ",";
+        }
+        else{
+            $request .= ";";
+        }
     }
 
-    SendQuotation($request, $idDevis);
-    header("Location:devis.php");
+    $result = SendQuotation($request);
+    if($result == true){
+        header("Location:devis.php");
+    }
+    else{
+        header("Location:calculateur.php");
+    }
     }
     else{
         header("Location:calculateur.php");
@@ -38,4 +52,8 @@ if (isset($_SESSION['name'])) {
 }
 else{
     header("Location:connexion.php?msg=4");
+}
+}
+else{
+    header("Location:calculateur.php");
 }

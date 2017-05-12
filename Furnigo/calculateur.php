@@ -102,7 +102,7 @@ and open the template in the editor.
                 </tr>
             </table>
             <input type="hidden" name="nbOption" id="nbOption" value="<?= $i ?>">
-        <input type="hidden" value="" id="optionTotal" name="optionTotal">
+        <input type="hidden" value="0" id="optionTotal" name="optionTotal">
         
         </form>
         </div>

@@ -21,8 +21,25 @@ function CreateQuotation($pricetotal,$m3total,$idClient){
     }
 }
 
-function SendQuotation($requete,$idDevis){
+function SendQuotation($requete){
     $db = connectdb();
     $sql = $db->prepare($requete);
-    $sql->execute();
+    if($sql->execute()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function GetQuotation($idUser){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM t_devis WHERE idClient = :idUser");
+    $sql->bindParam(':idUser',$idUser,PDO::PARAM_INT);
+    if($sql->execute()){
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    else{
+        return false;
+    }
 }

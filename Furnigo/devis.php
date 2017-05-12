@@ -1,4 +1,5 @@
 <?php
+require_once 'quotation.php';
 require_once 'message.php';
 session_start();
     if(!isset($_SESSION['name'])){
@@ -6,6 +7,7 @@ session_start();
         header('Location:connexion.php?msg=1');
         exit();
     }
+    $devis = GetQuotation($_SESSION['idUser']);
 ?>
 <!DOCTYPE html>
 <!--
@@ -38,6 +40,23 @@ and open the template in the editor.
         </nav>
         <div id="content">
             <?php echo "<h1>Bienvenue sur vos devis ".$_SESSION['name'].'</h1>'; ?>
+            <table border="1" width="100%">
+                <th>N°</th>
+                <th>Date du devis</th>
+                <th>M<sup>3</sup> Total</th>
+                <th>Coût total</th>
+            <?php
+            $persoCounter = 1;
+            foreach($devis as $devi): ?>
+                <tr>
+                    <td style="text-align: center"><?php echo $persoCounter ?></td>
+                    <td style="text-align: center"><?php echo $devi['DateDevis'] ?></td>
+                    <td style="text-align: center"><?php echo $devi['TotalM3'] ?></td>
+                    <td style="text-align: center"><?php echo $devi['Montant'] ?></td>
+                </tr>
+            <?php $persoCounter++;
+            endforeach; ?>
+                </table>
         </div>
         <?php
         // put your code here
