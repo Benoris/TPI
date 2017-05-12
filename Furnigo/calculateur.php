@@ -94,18 +94,21 @@ and open the template in the editor.
                     ?>
                 <?php endforeach; ?>
                 <tr>
-                    <td colspan="3"></td>
+                    <td colspan="2"></td>
+                    <td><input type="submit" name="sendOption"></td>
                     <td>Total</td>
                     <td id="totaldevis"></td>
                 </tr>
             </table>
+
+            <input type="hidden" id="nbOption" value="<?= $i ?>">
         </div>
-        <input type="hidden" value="" name="optionTotal">
+        <input type="hidden" value="" id="optionTotal" name="optionTotal">
     </center>
     <script type="text/javascript">
                 function ShowResult(id) {
                 if (document.getElementById("qt" + id).value == ""){
-                    document.getElementById("qt" + id).value = "0";
+                document.getElementById("qt" + id).value = "0";
                 }
                 let quantity = parseInt(document.getElementById("qt" + id).value);
                         if (quantity != 0){
@@ -114,7 +117,7 @@ and open the template in the editor.
                         //console.log(quantity + " " + unityPrice + " " + supplement)
                         document.getElementById("total" + id).textContent = QtTotal(quantity, unityPrice, supplement).toString();
                         console.log(CalculTotal().toString());
-                        document.getElementById("totaldevis").innerHTML = CalculTotal().toString();
+                        document.getElementById("totaldevis").textContent = CalculTotal().toString();
                 }
                 else{
                 document.getElementById("total" + $id).textContent = "0";
@@ -123,10 +126,12 @@ and open the template in the editor.
         function QtTotal(qt, unit, supp) {
         return qt * unit + supp;
         }
-        
+
         function CalculTotal(){
         var total = 0;
-                for (i = 0; i < 35; i++){
+                var nbOpt = parseInt(document.getElementById("nbOption").textContent);
+                for (i = 0; i < nbOpt; i++)
+        {
         total += parseInt(document.getElementById("total" + i.toString()).textContent);
         }
         return total;
