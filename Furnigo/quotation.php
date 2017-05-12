@@ -5,7 +5,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once 'dbconnect.php';
 
-function SendQuotation(){
-    
+function CreateQuotation($pricetotal,$m3total,$idClient){
+    $db = connectdb();
+    $sql = $db->prepare("INSERT INTO t_devis (Montant,DateDevis,TotalM3,idClient) VALUES (:pricetotal,NOW(),:m3total,:idClient)");
+    $sql->bindParam(':pricetotal',$pricetotal,PDO::PARAM_INT);
+    $sql->bindParam(':m3total',$m3total,PDO::PARAM_INT);
+    $sql->bindParam(':idClient',$idClient,PDO::PARAM_INT);
+    if($sql->execute()){
+        return $db->lastInsertId();
+    }
+    else{
+        return false;
+    }
+}
+
+function SendQuotation($requete,$idDevis){
+    $db = connectdb();
+    $sql = $db->prepare($requete);
+    $sql->execute();
 }

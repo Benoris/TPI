@@ -9,7 +9,7 @@ require_once 'dbconnect.php';
 
 function CheckUserId($Login,$pwd){
     $db = connectdb();
-    $sql = $db->prepare("SELECT Login FROM t_clients WHERE Login = :pseudo AND Password = :pwd");
+    $sql = $db->prepare("SELECT idClient,Login FROM t_clients WHERE Login = :pseudo AND Password = :pwd");
     $sql->bindParam(':pseudo', $Login, PDO::PARAM_STR);
     $sql->bindParam(':pwd', $pwd, PDO::PARAM_STR);
     if($sql->execute()) {

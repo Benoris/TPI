@@ -29,7 +29,7 @@ function connectdb() {
             }
              */
             $connectionString = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
-            $db = new PDO($connectionString, DB_USER, DB_PASS);
+            $db = new PDO($connectionString, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die("Erreur : " . $e->getMessage());

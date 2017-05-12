@@ -18,6 +18,7 @@ if (isset($_POST['send'])) {
     if ($sess) {
         session_start();
         $_SESSION['name'] = $sess[0]['Login'];
+        $_SESSION['idUser'] = $sess[0]['idClient'];
         header("Location: index.php");
     }
     else{

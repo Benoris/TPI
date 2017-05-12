@@ -8,6 +8,9 @@ if(isset($_GET['msg'])){
     else if($_GET['msg']==2){
         $msg = "Vous n'êtes pas connecté!";
     }
+    else if($_GET['msg']==4){
+        $msg = "Vous devez vous connecter pour enregister un devis!";
+    }
 }
 ?>
 <!DOCTYPE html>
