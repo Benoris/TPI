@@ -10,7 +10,6 @@ DEFINE('DB_NAME', "db_demenagement");
 DEFINE('DB_USER', "FurnigoUser");
 DEFINE('DB_PASS', "1234");
 
-mysql_set_charset("UTF-8");
 
 function connectdb() {
     static $db = null;
