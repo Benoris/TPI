@@ -23,3 +23,7 @@ function GetQtTotal($quantite,$prix){
     $total = $quantite * $prix;
     return $total;
 }
+
+function GetOption(){
+    
+}

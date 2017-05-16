@@ -49,6 +49,9 @@ if (isset($_SESSION['name'])) {
     else{
         header("Location:calculateur.php");
     }
+    if(isset($_GET['id']) && CheckQuotation($_SESSION['idUser'], $_GET['id'])){
+        DeleteQuotation($_GET['id']);
+}
 }
 else{
     header("Location:connexion.php?msg=4");
@@ -57,3 +60,4 @@ else{
 else{
     header("Location:calculateur.php");
 }
+

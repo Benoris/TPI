@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 12 Mai 2017 à 16:42
+-- Généré le :  Mar 16 Mai 2017 à 16:41
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -34,6 +34,44 @@ CREATE TABLE IF NOT EXISTS `r_ajouter` (
   KEY `FK_R_AJOUTER_idOption` (`idOption`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Contenu de la table `r_ajouter`
+--
+
+INSERT INTO `r_ajouter` (`idDevis`, `idOption`, `M3`) VALUES
+(8, 1, 6),
+(8, 2, 5),
+(8, 3, 0),
+(8, 4, 0),
+(8, 5, 0),
+(8, 6, 0),
+(8, 7, 0),
+(8, 8, 0),
+(8, 9, 0),
+(8, 10, 0),
+(8, 11, 0),
+(8, 12, 0),
+(8, 13, 0),
+(8, 14, 0),
+(8, 15, 0),
+(8, 16, 0),
+(8, 17, 0),
+(8, 18, 0),
+(8, 19, 0),
+(8, 20, 0),
+(8, 21, 0),
+(8, 22, 0),
+(8, 23, 0),
+(8, 24, 0),
+(8, 25, 0),
+(8, 26, 0),
+(8, 27, 0),
+(8, 28, 0),
+(8, 29, 0),
+(8, 30, 0),
+(8, 31, 0),
+(8, 32, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -48,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
   `UserMode` tinyint(1) NOT NULL,
   PRIMARY KEY (`idClient`),
   UNIQUE KEY `Login` (`Login`,`Email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `t_clients`
@@ -56,7 +94,8 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
 
 INSERT INTO `t_clients` (`idClient`, `Login`, `Email`, `Password`, `UserMode`) VALUES
 (1, 'admin', 'admin@furnigo.com', 'f6889fc97e14b42dec11a8c183ea791c5465b658', 1),
-(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
+(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0),
+(9, 'asdf', 'asdfdsf@sfdf.cd', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0);
 
 -- --------------------------------------------------------
 
@@ -89,7 +128,14 @@ CREATE TABLE IF NOT EXISTS `t_devis` (
   `idClient` int(11) NOT NULL,
   PRIMARY KEY (`idDevis`),
   KEY `FK_T_DEVIS_idClient` (`idClient`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+
+--
+-- Contenu de la table `t_devis`
+--
+
+INSERT INTO `t_devis` (`idDevis`, `Montant`, `DateDevis`, `TotalM3`, `idClient`) VALUES
+(8, 350, '2017-05-16', 11, 9);
 
 -- --------------------------------------------------------
 

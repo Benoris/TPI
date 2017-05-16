@@ -7,7 +7,6 @@
  */
 
 require 'users.php';
-require_once 'message.php';
 
 $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
 $mail = trim(filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL));
@@ -24,7 +23,9 @@ $hashpwd = sha1($pwd);
 $add = AddUser($pseudo,$mail,$hashpwd);
 if($add){
     header("Location:index.php");
+    exit;
 }
 else{
-    SetMessage("Impossible de créer le compte!");
+    header("Location:index.php?msg=9");
+    exit;
 }

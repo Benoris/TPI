@@ -8,6 +8,9 @@ Date:       10/05/2017
  */
 if(!isset($_SESSION['name'])){
     session_start();
+    if(isset($_SESSION['mode'])){
+        $mode = $_SESSION['mode'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -21,6 +24,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="icon" type="image/png" href="img/favicon.ico">
+        
         <title>Furnigo</title>
     </head>
     <body>
@@ -33,6 +37,9 @@ and open the template in the editor.
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php">Calculateur de devis</a></li>
+                <?php if(isset($_SESSION['name']) && $mode == 1){ ?>
+                <li><a href="admin.php">Administration</a></li>
+                <?php } ?>
                 <?php if(isset($_SESSION['name'])){?>
                 <li><a href="logout.php">Déconnexion</a></li>
                 <?php } ?>

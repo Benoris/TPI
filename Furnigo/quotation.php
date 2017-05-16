@@ -43,3 +43,32 @@ function GetQuotation($idUser){
         return false;
     }
 }
+
+function CheckQuotation($idUser,$idQuotation){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM t_devis WHERE idClient = :idUser AND idDevis = :idQuotation");
+    $sql->bindParam(":idUser", $idUser,PDO::PARAM_INT);
+    $sql->bindParam(":idQuotation", $idQuotation,PDO::PARAM_INT);
+    $sql->execute();
+    $content = $sql->fetchAll(PDO::FETCH_ASSOC);
+    if($content == NULL){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+function DeleteQuotation($idQuotation){
+    $db = connectdb();
+    $sql = $db->prepare("DELETE FROM r_ajouter WHERE idDevis = :idQuotation");
+    $sql->bindParam(":idQuotation", $idQuotation,PDO::PARAM_INT);
+    if($sql->execute()){
+        $sql = $db->prepare("DELETE FROM t_devis WHERE idDevis = :idQuotation");
+        $sql->bindParam(":idQuotation", $idQuotation,PDO::PARAM_INT);
+        $sql->execute();
+    }
+ else {
+        return false;
+    }
+}
