@@ -42,7 +42,7 @@ and open the template in the editor.
         </nav>
         <div id="content">
             <label for="selforfait">Sélectionnez votre forfait: </label>
-            <select name="selforfait">
+            <select name="selforfait" onchange="">
                 <?php foreach ($optionForfait as $forfait) : ?>
                     <option value="<?= $forfait['idForfait'] ?>"> <?= $forfait['Forfait'] ?></option><br>
                 <?php endforeach; ?>
@@ -158,6 +158,12 @@ and open the template in the editor.
             }
             return total;
         }
+        
+        function ShowTotal(){
+            var tot = CalculTotal();
+            document.getElementById("totaldevis").innerHTML = tot.toString();
+        }
+        
     </script>
 </body>
 </html>

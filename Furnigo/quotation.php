@@ -72,3 +72,8 @@ function DeleteQuotation($idQuotation){
         return false;
     }
 }
+
+function UpdateQuotation($id){
+    $db = connectdb();
+    $sql = $db->prepare("");
+}

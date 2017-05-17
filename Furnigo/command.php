@@ -24,6 +24,14 @@ function GetQtTotal($quantite,$prix){
     return $total;
 }
 
-function GetOption(){
-    
+function GetOption($idDevis){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM r_ajouter WHERE idDevis = :idDevis");
+    $sql->bindParam(":idDevis", $idDevis,  PDO::PARAM_INT);
+    if($sql->execute()){
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    else{
+        return false;
+    }
 }
