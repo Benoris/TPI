@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 16 Mai 2017 à 16:41
+-- Généré le :  Jeu 18 Mai 2017 à 16:35
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -39,38 +39,38 @@ CREATE TABLE IF NOT EXISTS `r_ajouter` (
 --
 
 INSERT INTO `r_ajouter` (`idDevis`, `idOption`, `M3`) VALUES
-(8, 1, 6),
-(8, 2, 5),
-(8, 3, 0),
-(8, 4, 0),
-(8, 5, 0),
-(8, 6, 0),
-(8, 7, 0),
-(8, 8, 0),
-(8, 9, 0),
-(8, 10, 0),
-(8, 11, 0),
-(8, 12, 0),
-(8, 13, 0),
-(8, 14, 0),
-(8, 15, 0),
-(8, 16, 0),
-(8, 17, 0),
-(8, 18, 0),
-(8, 19, 0),
-(8, 20, 0),
-(8, 21, 0),
-(8, 22, 0),
-(8, 23, 0),
-(8, 24, 0),
-(8, 25, 0),
-(8, 26, 0),
-(8, 27, 0),
-(8, 28, 0),
-(8, 29, 0),
-(8, 30, 0),
-(8, 31, 0),
-(8, 32, 0);
+(11, 1, 1),
+(11, 2, 2),
+(11, 3, 3),
+(11, 4, 4),
+(11, 5, 5),
+(11, 6, 1),
+(11, 7, 0),
+(11, 8, 0),
+(11, 9, 0),
+(11, 10, 0),
+(11, 11, 0),
+(11, 12, 0),
+(11, 13, 0),
+(11, 14, 0),
+(11, 15, 0),
+(11, 16, 0),
+(11, 17, 0),
+(11, 18, 0),
+(11, 19, 0),
+(11, 20, 0),
+(11, 21, 0),
+(11, 22, 0),
+(11, 23, 0),
+(11, 24, 0),
+(11, 25, 0),
+(11, 26, 0),
+(11, 27, 0),
+(11, 28, 0),
+(11, 29, 0),
+(11, 30, 0),
+(11, 31, 0),
+(11, 32, 0);
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
   `UserMode` tinyint(1) NOT NULL,
   PRIMARY KEY (`idClient`),
   UNIQUE KEY `Login` (`Login`,`Email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
 --
 -- Contenu de la table `t_clients`
@@ -94,8 +94,7 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
 
 INSERT INTO `t_clients` (`idClient`, `Login`, `Email`, `Password`, `UserMode`) VALUES
 (1, 'admin', 'admin@furnigo.com', 'f6889fc97e14b42dec11a8c183ea791c5465b658', 1),
-(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0),
-(9, 'asdf', 'asdfdsf@sfdf.cd', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0);
+(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
 
 -- --------------------------------------------------------
 
@@ -104,15 +103,22 @@ INSERT INTO `t_clients` (`idClient`, `Login`, `Email`, `Password`, `UserMode`) V
 --
 
 CREATE TABLE IF NOT EXISTS `t_detail` (
-  `idDevis` int(11) NOT NULL AUTO_INCREMENT,
+  `idDetail` int(11) NOT NULL AUTO_INCREMENT,
   `DescriptionObjetOuLieu` text COLLATE utf8_bin NOT NULL,
   `VolumeApproxM3` int(11) NOT NULL,
   `SurfaceApproxM2` int(11) NOT NULL,
   `PoidsKg` int(11) NOT NULL,
-  `idDevis_T_DEVIS` int(11) NOT NULL,
-  PRIMARY KEY (`idDevis`),
-  KEY `FK_T_DETAIL_idDevis_T_DEVIS` (`idDevis_T_DEVIS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+  `idDevis` int(11) NOT NULL,
+  PRIMARY KEY (`idDetail`),
+  KEY `FK_T_DETAIL_idDevis_T_DEVIS` (`idDevis`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+
+--
+-- Contenu de la table `t_detail`
+--
+
+INSERT INTO `t_detail` (`idDetail`, `DescriptionObjetOuLieu`, `VolumeApproxM3`, `SurfaceApproxM2`, `PoidsKg`, `idDevis`) VALUES
+(11, 'Manoir Van Holten', 7000, 1000, 40000, 11);
 
 -- --------------------------------------------------------
 
@@ -128,14 +134,14 @@ CREATE TABLE IF NOT EXISTS `t_devis` (
   `idClient` int(11) NOT NULL,
   PRIMARY KEY (`idDevis`),
   KEY `FK_T_DEVIS_idClient` (`idClient`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `t_devis`
 --
 
 INSERT INTO `t_devis` (`idDevis`, `Montant`, `DateDevis`, `TotalM3`, `idClient`) VALUES
-(8, 350, '2017-05-16', 11, 9);
+(11, 3045, '2017-05-18', 16, 2);
 
 -- --------------------------------------------------------
 
@@ -181,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `t_options` (
 
 INSERT INTO `t_options` (`idOption`, `DescriptionDetaillee`, `PrixSupplementDeBase`, `PrixAuM3`) VALUES
 (1, 'Emballage du petit linge (effets personnels)', 60, 15),
-(2, 'Emballage du linge de maison (cartons)', 100, 20),
+(2, 'Emballage du linge de maison (cartons)', 100, 25),
 (3, 'Emballage des livres', 50, 50),
 (4, 'Emballage divers, matériels et objets non fragiles', 150, 60),
 (5, 'Emballage de la vaisselle et objets fragiles en caisses et/ou valises "demécrin"', 150, 100),
@@ -221,14 +227,13 @@ INSERT INTO `t_options` (`idOption`, `DescriptionDetaillee`, `PrixSupplementDeBa
 -- Contraintes pour la table `r_ajouter`
 --
 ALTER TABLE `r_ajouter`
-  ADD CONSTRAINT `FK_R_AJOUTER_idDevis` FOREIGN KEY (`idDevis`) REFERENCES `t_devis` (`idDevis`),
-  ADD CONSTRAINT `FK_R_AJOUTER_idOption` FOREIGN KEY (`idOption`) REFERENCES `t_options` (`idOption`);
+  ADD CONSTRAINT `FK_R_AJOUTER_idDevis` FOREIGN KEY (`idDevis`) REFERENCES `t_devis` (`idDevis`);
 
 --
 -- Contraintes pour la table `t_detail`
 --
 ALTER TABLE `t_detail`
-  ADD CONSTRAINT `FK_T_DETAIL_idDevis_T_DEVIS` FOREIGN KEY (`idDevis_T_DEVIS`) REFERENCES `t_devis` (`idDevis`);
+  ADD CONSTRAINT `FK_T_DETAIL_idDevis_T_DEVIS` FOREIGN KEY (`idDevis`) REFERENCES `t_devis` (`idDevis`);
 
 --
 -- Contraintes pour la table `t_devis`
