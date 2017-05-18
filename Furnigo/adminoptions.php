@@ -76,9 +76,9 @@ and open the template in the editor.
                 <form action="addoption.php" method="post">
                     <tr>
                         <td></td>
-                        <td><textarea name="description" cols="49"></textarea></td>
-                        <td><input type="number" name="prix" placeholder="Prix en supplément"></td>
-                        <td><input type="number" name="pm3" placeholder="Prix au Mètre carré"></td>
+                        <td><textarea name="description" cols="49" required=""></textarea></td>
+                        <td><input type="number" name="prix" placeholder="Prix en supplément" required=""></td>
+                        <td><input type="number" name="pm3" placeholder="Prix au Mètre carré" required=""></td>
                         <td colspan="2"><input type="submit" name="add" value="Créer" style="width: 125px"></td>
                     </tr>
                 </form>

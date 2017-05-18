@@ -19,10 +19,6 @@ function GetOptions(){
     $sql->execute();
     return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
-function GetQtTotal($quantite,$prix){
-    $total = $quantite * $prix;
-    return $total;
-}
 
 function GetOption($idDevis){
     $db = connectdb();
