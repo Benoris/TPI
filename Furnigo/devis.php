@@ -26,6 +26,15 @@ if (isset($_GET['id'])) {
     }
     
 }
+if(isset($_GET['msg'])){
+    $code = $_GET['msg'];
+    if($code = 17){
+        $msg = "Modification réussie!";
+    }
+    elseif($code = 99){
+        $msg = "Erreure lors de la modification!";
+    }
+}
 ?>
 <!DOCTYPE html>
 <!--

@@ -75,7 +75,7 @@ and open the template in the editor.
                     foreach ($options as $opt) :
                         ?>
                         <tr>
-                            <td style="text-align: center"><input type="number" value="<?php echo $deviClient[$i]['M3'] ?>" min="0" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onchange="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
+                            <td style="text-align: center"><input type="number" value="<?php echo $deviClient[$i]['M3'] ?>" min="0" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onChange="ShowResult(<?php echo $opt['idOption'] ?>)" onkeypress="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
                             <td><?= $opt['DescriptionDetaillee'] ?></td>
                             <td style="text-align: center" id="supplement<?php echo $opt['idOption'] ?>"><?= $opt['PrixSupplementDeBase'] ?></td>
                             <td style="text-align: center" id="pm3<?php echo $opt['idOption'] ?>"><?= $opt['PrixAuM3'] ?></td>

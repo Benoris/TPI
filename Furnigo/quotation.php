@@ -73,7 +73,15 @@ function DeleteQuotation($idQuotation){
     }
 }
 
-function UpdateQuotation($id){
+function UpdateQuotation($idQuot,$tot){
     $db = connectdb();
-    $sql = $db->prepare("");
+    $sql = $db->prepare("UPDATE `t_devis` SET DateDevis = NOW(), `TotalM3`= (SELECT SUM(M3) FROM r_ajouter WHERE r_ajouter.idDevis = :idQuot), Montant=:tot WHERE idDevis = :idQuot");
+    $sql->bindParam(":idQuot", $idQuot,PDO::PARAM_INT);
+    $sql->bindParam(":tot", $tot,  PDO::PARAM_INT);
+    if($sql->execute()){
+        return true;
+    }
+ else {
+        return false;
+    }
 }

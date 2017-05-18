@@ -72,7 +72,7 @@ and open the template in the editor.
                     $i++;
                     ?>
                     <tr>
-                        <td style="text-align: center"><input type="number" value="0" min="0" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onchange="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
+                        <td style="text-align: center"><input type="number" value="0" min="0" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onchange="ShowResult(<?php echo $opt['idOption'] ?>)" onkeypress="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
                         <td><?= $opt['DescriptionDetaillee'] ?></td>
                         <td style="text-align: center" id="supplement<?php echo $opt['idOption'] ?>"><?= $opt['PrixSupplementDeBase'] ?></td>
                         <td style="text-align: center" id="pm3<?php echo $opt['idOption'] ?>"><?= $opt['PrixAuM3'] ?></td>
@@ -130,7 +130,6 @@ and open the template in the editor.
                 if (quantity != 0) {
                     var unityPrice = parseInt(document.getElementById("pm3" + id).textContent);
                     var supplement = parseInt(document.getElementById("supplement" + id).textContent);
-                    //console.log(quantity + " " + unityPrice + " " + supplement)
 
 
                     document.getElementById("total" + id).textContent = QtTotal(quantity, unityPrice, supplement).toString();
@@ -150,13 +149,26 @@ and open the template in the editor.
         }
 
         function CalculTotal() {
-            var total = 0;
-            var nbOpt = parseInt(document.getElementById("nbOption").value);
-            for (var i = 1; i < nbOpt + 1; i++)
-            {
-                total += parseInt(document.getElementById("total" + i.toString()).textContent);
-            }
-            return total;
+                var total = 0;
+                for (var i = 1; i < nbOpt + 1; i++)
+                {
+                    total += parseInt(document.getElementById("total" + i.toString()).textContent);
+                }
+                var forfait = document.getElementById("forfait");
+                var selectedforfait = parseInt(forfait.options[forfait.selectedIndex].value);
+                if (selectedforfait === 1) {
+                    total += 1500;
+                }
+                else if (selectedforfait === 2) {
+                    total += 1000;
+                }
+                else if (selectedforfait === 3) {
+                    total += 750;
+                }
+                else if (selectedforfait === 4) {
+                    total += 500;
+                }
+                return total;
         }
         
         function ShowTotal(){

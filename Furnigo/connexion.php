@@ -1,34 +1,27 @@
-<?php 
-if(!isset($_SESSION['name'])){
+<?php
+if (!isset($_SESSION['name'])) {
     session_start();
-    if(isset($_SESSION['mode'])){
+    if (isset($_SESSION['mode'])) {
         $mode = $_SESSION['mode'];
     }
 }
-if(isset($_GET['msg'])){
-    if($_GET['msg']==1){
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == 1) {
         $msg = "Veuillez vous connecter pour accéder à cette page!";
-    }
-    else if($_GET['msg']==2){
+    } else if ($_GET['msg'] == 2) {
         $msg = "Vous n'êtes pas connecté!";
-    }
-    else if($_GET['msg']==3){
+    } else if ($_GET['msg'] == 3) {
         $msg = "Pseudo ou mot de passe erroné";
-    }
-    else if($_GET['msg']==4){
+    } else if ($_GET['msg'] == 4) {
         $msg = "Vous devez vous connecter pour enregister un devis!";
-    }
-    else if($_GET['msg']==5){
+    } else if ($_GET['msg'] == 5) {
         $msg = "Seul l'admin peut accéder à cette page!";
-    }
-    else if($_GET['msg']==9){
+    } else if ($_GET['msg'] == 9) {
         $msg = "Impossible de créer le compte!";
     }
-}
-else{
+} else {
     $msg = "";
 }
-
 ?>
 <!DOCTYPE html>
 <!--
@@ -46,7 +39,6 @@ and open the template in the editor.
     <body>
     <center>
         <div id="title"><h1>Furnigo</h1></div>
-
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
@@ -54,30 +46,38 @@ and open the template in the editor.
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php">Calculateur de devis</a></li>
-                <?php if(isset($_SESSION['name']) && $mode == 1){ ?>
-                <li><a href="admin.php">Administration</a></li>
-                <?php } ?>
-                <?php if(isset($_SESSION['name'])){?>
-                <li><a href="logout.php">Déconnexion</a></li>
-                <?php } ?>
+<?php if (isset($_SESSION['name']) && $mode == 1) { ?>
+                    <li><a href="admin.php">Administration</a></li>
+<?php } ?>
+<?php if (isset($_SESSION['name'])) { ?>
+                    <li><a href="logout.php">Déconnexion</a></li>
+<?php } ?>
             </ul>
         </nav>
         <div id="content">
             <fieldset>
                 <legend>Connexion</legend>
                 <form action="login.php" method="post">
-                    <label for="pseudo">Pseudo:</label>
-                    <input type="text" name="pseudo" required><br>
-                    <label for="pwd">Mot de passe:</label>
-                    <input type="password" name="pwd"><br>
-                    <?php echo $msg.'<br>'?>
-                    <input type="submit" name="send">
+                    <table>
+                        <tr>
+                            <td><label for="pseudo">Pseudo:</label></td>
+                            <td><input type="text" name="pseudo" required><br></td>
+                        </tr>
+                        <tr>
+                            <td><label for="pwd">Mot de passe:</label></td>
+                            <td><input type="password" name="pwd"><br></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><?php echo $msg . '<br>' ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" name="send"></td>
+                        </tr>
+                    </table>
                 </form>
             </fieldset>
         </div>
-        <?php
-        // put your code here
-        ?>
     </center>
 </body>
 </html>
