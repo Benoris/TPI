@@ -85,3 +85,62 @@ function UpdateQuotation($idQuot,$tot){
         return false;
     }
 }
+function GetOptions(){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM t_options");
+    $sql->execute();
+    return $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function UpdateOption($idOption,$desc,$prix,$pm3){
+    $db = connectdb();
+    $sql = $db->prepare("UPDATE t_options SET DescriptionDetaillee = :desc, PrixSupplementDeBase = :prix, PrixAuM3 = :pm3 WHERE idOption = :idOption");
+    $sql->bindParam(":desc", $desc, PDO::PARAM_STR);
+    $sql->bindParam(":prix", $prix, PDO::PARAM_INT);
+    $sql->bindParam(":pm3", $pm3, PDO::PARAM_INT);
+    $sql->bindParam(":idOption", $idOption, PDO::PARAM_INT);
+    if($sql->execute()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function GetOptionById($idOption){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM t_options WHERE idOption = :idOption");
+    $sql->bindParam(":idOption", $idOption,  PDO::PARAM_INT);
+    if($sql->execute()){
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    else{
+        return false;
+    }
+}
+
+function DeleteOption($idOption){
+    $db = connectdb();
+    $sql = $db->prepare("DELETE FROM t_options WHERE idOption = :idoption");
+    $sql->bindParam(":idoption", $idOption,PDO::PARAM_INT);
+    if($sql->execute()){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function CreateOption($description, $supp, $pm3){
+    $db = connectdb();
+    $sql = $db->prepare("INSERT INTO t_options (DescriptionDetaillee,PrixSupplementDeBase,PrixAuM3) VALUE(:desc,:supp,:pm3)");
+    $sql->bindParam(":desc", $description, PDO::PARAM_STR);
+    $sql->bindParam(":supp", $supp, PDO::PARAM_INT);
+    $sql->bindParam(":pm3", $pm3, PDO::PARAM_INT);
+    if($sql->execute()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

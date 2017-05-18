@@ -37,7 +37,7 @@ and open the template in the editor.
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php" class="active">Calculateur de devis</a></li>
                 <?php if (isset($_SESSION['name']) && $mode == 1) { ?>
-                    <li><a href="admin.php">Administration</a></li>
+                    <li><a href="adminuser.php">Administration</a></li>
                 <?php } ?>
                 <?php if (isset($_SESSION['name'])) { ?>
                     <li><a href="logout.php">Déconnexion</a></li>

@@ -28,12 +28,14 @@ and open the template in the editor.
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
+                <?php if(!isset($_SESSION['name'])): ?>
                 <li><a href="connexion.php">Connexion</a></li>
+                <?php endif; ?>
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php" class="active">Calculateur de devis</a></li>
                 <?php if(isset($_SESSION['name']) && $mode == 1){ ?>
-                <li><a href="admin.php">Administration</a></li>
+                <li><a href="adminuser.php">Administration</a></li>
                 <?php } ?>
                 <?php if (isset($_SESSION['name'])) { ?>
                     <li><a href="logout.php">Déconnexion</a></li>
@@ -72,7 +74,7 @@ and open the template in the editor.
                     $i++;
                     ?>
                     <tr>
-                        <td style="text-align: center"><input type="number" value="0" min="0" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onchange="ShowResult(<?php echo $opt['idOption'] ?>)" onkeypress="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
+                        <td style="text-align: center"><input type="number" value="0" min="0" max="250" style="width: 50px" id="qt<?php echo $opt['idOption'] ?>" name="qtOption<?php echo $opt['idOption'] ?>" onchange="ShowResult(<?php echo $opt['idOption'] ?>)" onkeypress="ShowResult(<?php echo $opt['idOption'] ?>)"></td>
                         <td><?= $opt['DescriptionDetaillee'] ?></td>
                         <td style="text-align: center" id="supplement<?php echo $opt['idOption'] ?>"><?= $opt['PrixSupplementDeBase'] ?></td>
                         <td style="text-align: center" id="pm3<?php echo $opt['idOption'] ?>"><?= $opt['PrixAuM3'] ?></td>
@@ -102,12 +104,16 @@ and open the template in the editor.
                     }
                     ?>
                 <?php endforeach; ?>
+                    <tr>
+                        <td style="text-align: center"><label></label></td>
+                    </tr>
                 <tr>
                     <td colspan="2"></td>
                     <td><input type="submit" name="sendOption"></td>
                     <td>Total</td>
                     <td id="totaldevis"></td>
                 </tr>
+                
             </table>
             <input type="hidden" name="nbOption" id="nbOption" value="<?= $i ?>">
         <input type="hidden" value="0" id="optionTotal" name="optionTotal">

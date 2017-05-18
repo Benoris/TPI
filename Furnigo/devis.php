@@ -56,12 +56,14 @@ and open the template in the editor.
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
+                <?php if(!isset($_SESSION['name'])): ?>
                 <li><a href="connexion.php">Connexion</a></li>
+                <?php endif; ?>
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php" class="active">Mes devis</a></li>
                 <li><a href="calculateur.php">Calculateur de devis</a></li>
                 <?php if (isset($_SESSION['name']) && $mode == 1) { ?>
-                    <li><a href="admin.php">Administration</a></li>
+                    <li><a href="adminuser.php">Administration</a></li>
                 <?php } ?>
                 <?php if (isset($_SESSION['name'])) { ?>
                     <li><a href="logout.php">Déconnexion</a></li>
