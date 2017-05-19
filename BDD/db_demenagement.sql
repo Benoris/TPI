@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 18 Mai 2017 à 16:35
+-- Généré le :  Ven 19 Mai 2017 à 16:43
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -70,7 +70,71 @@ INSERT INTO `r_ajouter` (`idDevis`, `idOption`, `M3`) VALUES
 (11, 29, 0),
 (11, 30, 0),
 (11, 31, 0),
-(11, 32, 0);
+(11, 32, 0),
+(16, 1, 0),
+(16, 2, 0),
+(16, 3, 0),
+(16, 4, 0),
+(16, 5, 0),
+(16, 6, 0),
+(16, 7, 0),
+(16, 8, 0),
+(16, 9, 0),
+(16, 10, 0),
+(16, 11, 0),
+(16, 12, 0),
+(16, 13, 0),
+(16, 14, 0),
+(16, 15, 0),
+(16, 16, 0),
+(16, 17, 0),
+(16, 18, 0),
+(16, 19, 0),
+(16, 20, 0),
+(16, 21, 0),
+(16, 22, 0),
+(16, 23, 0),
+(16, 24, 0),
+(16, 25, 0),
+(16, 26, 0),
+(16, 27, 0),
+(16, 28, 0),
+(16, 29, 0),
+(16, 30, 0),
+(16, 31, 0),
+(16, 32, 5),
+(17, 1, 4),
+(17, 2, 0),
+(17, 3, 0),
+(17, 4, 0),
+(17, 5, 0),
+(17, 6, 0),
+(17, 7, 0),
+(17, 8, 0),
+(17, 9, 0),
+(17, 10, 0),
+(17, 11, 0),
+(17, 12, 0),
+(17, 13, 0),
+(17, 14, 0),
+(17, 15, 0),
+(17, 16, 0),
+(17, 17, 0),
+(17, 18, 0),
+(17, 19, 0),
+(17, 20, 0),
+(17, 21, 0),
+(17, 22, 0),
+(17, 23, 0),
+(17, 24, 0),
+(17, 25, 0),
+(17, 26, 0),
+(17, 27, 0),
+(17, 28, 0),
+(17, 29, 0),
+(17, 30, 0),
+(17, 31, 0),
+(17, 32, 0);
 
 -- --------------------------------------------------------
 
@@ -86,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
   `UserMode` tinyint(1) NOT NULL,
   PRIMARY KEY (`idClient`),
   UNIQUE KEY `Login` (`Login`,`Email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `t_clients`
@@ -94,7 +158,8 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
 
 INSERT INTO `t_clients` (`idClient`, `Login`, `Email`, `Password`, `UserMode`) VALUES
 (1, 'admin', 'admin@furnigo.com', 'f6889fc97e14b42dec11a8c183ea791c5465b658', 1),
-(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
+(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0),
+(4, 'hack', 'hacker@dfd.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0);
 
 -- --------------------------------------------------------
 
@@ -108,17 +173,20 @@ CREATE TABLE IF NOT EXISTS `t_detail` (
   `VolumeApproxM3` int(11) NOT NULL,
   `SurfaceApproxM2` int(11) NOT NULL,
   `PoidsKg` int(11) NOT NULL,
+  `Distance` int(5) NOT NULL,
   `idDevis` int(11) NOT NULL,
   PRIMARY KEY (`idDetail`),
   KEY `FK_T_DETAIL_idDevis_T_DEVIS` (`idDevis`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `t_detail`
 --
 
-INSERT INTO `t_detail` (`idDetail`, `DescriptionObjetOuLieu`, `VolumeApproxM3`, `SurfaceApproxM2`, `PoidsKg`, `idDevis`) VALUES
-(11, 'Manoir Van Holten', 7000, 1000, 40000, 11);
+INSERT INTO `t_detail` (`idDetail`, `DescriptionObjetOuLieu`, `VolumeApproxM3`, `SurfaceApproxM2`, `PoidsKg`, `Distance`, `idDevis`) VALUES
+(11, 'Manoir Van Holten', 7000, 1000, 40000, 150, 11),
+(15, 'asdfasfadfa', 0, 2, 2, 7, 16),
+(16, '', 4, 0, 0, 5, 17);
 
 -- --------------------------------------------------------
 
@@ -134,14 +202,16 @@ CREATE TABLE IF NOT EXISTS `t_devis` (
   `idClient` int(11) NOT NULL,
   PRIMARY KEY (`idDevis`),
   KEY `FK_T_DEVIS_idClient` (`idClient`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
 
 --
 -- Contenu de la table `t_devis`
 --
 
 INSERT INTO `t_devis` (`idDevis`, `Montant`, `DateDevis`, `TotalM3`, `idClient`) VALUES
-(11, 3045, '2017-05-18', 16, 2);
+(11, 3045, '2017-05-18', 16, 2),
+(16, 0, '2017-05-19', 5, 4),
+(17, 162000, '2017-05-19', 4, 4);
 
 -- --------------------------------------------------------
 
