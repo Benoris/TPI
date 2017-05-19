@@ -31,3 +31,15 @@ function GetOption($idDevis){
         return false;
     }
 }
+
+function GetDetail($idDevis){
+    $db = connectdb();
+    $sql = $db->prepare("SELECT * FROM t_detail WHERE idDevis = :idDevis");
+    $sql->bindParam(":idDevis", $idDevis,  PDO::PARAM_INT);
+    if($sql->execute()){
+        return $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
+    else{
+        return false;
+    }
+}

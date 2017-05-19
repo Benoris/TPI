@@ -44,9 +44,9 @@ and open the template in the editor.
         </nav>
         <div id="content">
             <label for="selforfait">Sélectionnez votre forfait: </label>
-            <select name="selforfait" onchange="">
+            <select id="selforfait" name="selforfait" onchange="ShowTotal()">
                 <?php foreach ($optionForfait as $forfait) : ?>
-                    <option value="<?= $forfait['idForfait'] ?>"> <?= $forfait['Forfait'] ?></option><br>
+                    <option value="<?= $forfait['idForfait'] ?>"> <?= $forfait['Forfait'] ?></option><br/>
                 <?php endforeach; ?>
 
             </select>
@@ -105,7 +105,26 @@ and open the template in the editor.
                     ?>
                 <?php endforeach; ?>
                     <tr>
-                        <td style="text-align: center"><label></label></td>
+                        <td colspan="5" style="text-align: center">
+                            <table>
+                                <tr>
+                                    <td><label for="lieu">Description du lieu: </label></td>
+                                    <td><textarea cols="50" rows="5" name="lieu" placeholder="Description du lieu à déménager..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="poids">Poids total (en Kg): </label></td>
+                                    <td><input type="number" id="poids" min="0" max="9999" name="poid" value="0" required=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="surface">Surface (en M<sup>2</sup>): </label></td>
+                                    <td><input type="number" id="surface" min="0" max="999" name="surface" value="0" required=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="distance">Distance (en Km): </label></td>
+                                    <td><input type="number" id="distance" min="0" max="1500" name="distance" value="0" required="" onkeypress="ShowTotal()" onchange="ShowTotal()"></td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
                 <tr>
                     <td colspan="2"></td>
@@ -113,7 +132,6 @@ and open the template in the editor.
                     <td>Total</td>
                     <td id="totaldevis"></td>
                 </tr>
-                
             </table>
             <input type="hidden" name="nbOption" id="nbOption" value="<?= $i ?>">
         <input type="hidden" value="0" id="optionTotal" name="optionTotal">
@@ -122,6 +140,9 @@ and open the template in the editor.
         </div>
     </center>
     <script type="text/javascript">
+        
+        var nbOpt = parseInt(document.getElementById("nbOption").value);
+        
         function ShowResult(id) {
             if (document.getElementById("qt" + id).value == "") {
                 document.getElementById("qt" + id).value = "0";
@@ -137,13 +158,13 @@ and open the template in the editor.
                     var unityPrice = parseInt(document.getElementById("pm3" + id).textContent);
                     var supplement = parseInt(document.getElementById("supplement" + id).textContent);
 
-
                     document.getElementById("total" + id).textContent = QtTotal(quantity, unityPrice, supplement).toString();
                     console.log(CalculTotal().toString());
                     document.getElementById("totaldevis").innerHTML = CalculTotal().toString();
                     document.getElementById("optionTotal").value = CalculTotal().toString();
                 }
             }
+            ShowTotal();
         }
         function QtTotal(qt, unit, supp) {
             if (qt === 0) {
@@ -160,8 +181,14 @@ and open the template in the editor.
                 {
                     total += parseInt(document.getElementById("total" + i.toString()).textContent);
                 }
-                var forfait = document.getElementById("forfait");
+                
+                var distance = document.getElementById("distance").value;
+                
+                total += GetTotalM3() * distance * 0.007;
+                
+                var forfait = document.getElementById("selforfait");
                 var selectedforfait = parseInt(forfait.options[forfait.selectedIndex].value);
+                
                 if (selectedforfait === 1) {
                     total += 1500;
                 }
@@ -174,14 +201,22 @@ and open the template in the editor.
                 else if (selectedforfait === 4) {
                     total += 500;
                 }
-                return total;
+                return total.toFixed(2);
         }
         
         function ShowTotal(){
             var tot = CalculTotal();
             document.getElementById("totaldevis").innerHTML = tot.toString();
+            document.getElementById("optionTotal").value = tot.toString();
         }
         
+        function GetTotalM3(){
+            var totalVolume = 0;
+            for(i = 1; i<=nbOpt;i++){
+                totalVolume += parseInt(document.getElementById("pm3"+i).textContent);
+            }
+            return totalVolume;
+        }
     </script>
 </body>
 </html>

@@ -17,10 +17,10 @@ $id = filter_input(INPUT_GET,"id",FILTER_VALIDATE_INT);
 $result = DeleteUser($id);
 
 if($result){
-    header("Location: admin.php?msg=1");
+    header("Location: adminoptions.php?msg=1");
     exit;
 }
 else{
-    header("Location: admin.php?msg=2");
+    header("Location: adminoptions.php?msg=2");
     exit;
 }

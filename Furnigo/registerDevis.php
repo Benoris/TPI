@@ -11,19 +11,29 @@ if($_POST['optionTotal']!=0){
 session_start();
 if (isset($_SESSION['name'])) {
     require_once 'quotation.php';
-    
+    //Données des options
     $nbOption = filter_input(INPUT_POST, 'nbOption', FILTER_SANITIZE_NUMBER_INT);
     $nbOption = intval($nbOption);
     $pricetotal = filter_input(INPUT_POST, 'optionTotal', FILTER_SANITIZE_NUMBER_INT);
     $pricetotal = intval($pricetotal);
     $idUser = $_SESSION['idUser'];
     $idUser = intval($idUser);
+    
+    //Données du formulaire de détail
+    $lieu = filter_input(INPUT_POST,'lieu', FILTER_SANITIZE_STRING);
+    $poids = filter_input(INPUT_POST,'poid', FILTER_VALIDATE_INT);
+    $surface = filter_input((INPUT_POST), 'surface', FILTER_VALIDATE_INT);
+    $distance = filter_input(INPUT_POST, 'distance',FILTER_VALIDATE_INT);
+    
     $totalm3 = 0;
     
     for ($i = 1; $i < $nbOption; $i++) {
         $totalm3 += $_POST['qtOption' . $i];
     }
     $idDevis = CreateQuotation($pricetotal,$totalm3,$idUser);
+    
+    
+    $detail = AddDetails($lieu,$totalm3,$surface,$poids,$distance,$idDevis);
     if($idDevis != FALSE){
         
     $request = "INSERT INTO r_ajouter (idDevis,idOption,M3) VALUES";
@@ -37,7 +47,6 @@ if (isset($_SESSION['name'])) {
             $request .= ";";
         }
     }
-
     $result = SendQuotation($request);
     if($result == true){
         header("Location:devis.php");

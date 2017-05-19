@@ -8,9 +8,11 @@ if (!isset($_SESSION['name'])) {
 require_once 'command.php';
 $optionForfait = GetForfait();
 $options = GetOptions();
+
 if (isset($_GET['id'])) {
     $idDevi = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     $deviClient = GetOption($idDevi);
+    $detail = GetDetail($idDevi);
 }
 ?>
 <!DOCTYPE html>
@@ -106,6 +108,28 @@ and open the template in the editor.
                         $i++;
                         ?>
                     <?php endforeach; ?>
+                        <tr>
+                        <td colspan="5" style="text-align: center">
+                            <table>
+                                <tr>
+                                    <td><label for="lieu">Description du lieu: </label></td>
+                                    <td><textarea cols="50" rows="5" name="lieu" placeholder="Description du lieu à déménager..."><?php echo $detail[0]['DescriptionObjetOuLieu'] ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="poids">Poids total (en Kg): </label></td>
+                                    <td><input type="number" id="poids" min="0" max="9999" name="poid" required="" value="<?php echo $detail[0]['PoidsKg'] ?>"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="surface">Surface (en M<sup>2</sup>): </label></td>
+                                    <td><input type="number" id="surface" min="0" max="999" name="surface" value="<?php echo $detail[0]['SurfaceApproxM2'] ?>" required=""></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="distance">Distance (en Km): </label></td>
+                                    <td><input type="number" id="distance" min="0" max="1500" name="distance" value="<?php echo $detail[0]['Distance'] ?>" required="" onkeypress="ShowTotal()" onchange="ShowTotal()"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                     <tr>
                         <td colspan="2"></td>
                         <td><input type="submit" name="sendOption"></td>
@@ -142,17 +166,20 @@ and open the template in the editor.
             console.log(CalculTotal().toString());
 
 
-
-
-
             function CalculTotal() {
                 var total = 0;
                 for (var i = 1; i < nbOpt + 1; i++)
                 {
                     total += parseInt(document.getElementById("total" + i.toString()).textContent);
                 }
+                
+                var distance = document.getElementById("distance").value;
+                
+                total += GetTotalM3() * distance * 0.007;
+                
                 var forfait = document.getElementById("forfait");
                 var selectedforfait = parseInt(forfait.options[forfait.selectedIndex].value);
+                
                 if (selectedforfait === 1) {
                     total += 1500;
                 }
@@ -165,8 +192,8 @@ and open the template in the editor.
                 else if (selectedforfait === 4) {
                     total += 500;
                 }
-                return total;
-            }
+                return total.toFixed(2);
+        }
         function ShowResult(id) {
             if (document.getElementById("qt" + id).value == "") {
                 document.getElementById("qt" + id).value = "0";
@@ -197,6 +224,19 @@ and open the template in the editor.
             else {
                 return qt * unit + supp;
             }
+        }
+        function GetTotalM3(){
+            var totalVolume = 0;
+            for(i = 1; i<=nbOpt;i++){
+                totalVolume += parseInt(document.getElementById("pm3"+i).textContent);
+            }
+            return totalVolume;
+        }
+        function ShowTotal(){
+            var tot = CalculTotal();
+ 
+            document.getElementById("totaldevis").innerHTML = tot.toString();
+            document.getElementById("optionTotal").value = tot.toString();
         }
     </script>
 </body>

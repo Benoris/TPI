@@ -11,21 +11,39 @@ require_once 'quotation.php';
 $nbOption = filter_input(INPUT_POST, 'nbOption', FILTER_SANITIZE_NUMBER_INT);
 $nbOption = intval($nbOption);
 
+$lieu = filter_input(INPUT_POST, 'lieu', FILTER_SANITIZE_STRING);
+$poids = filter_input(INPUT_POST, 'poid', FILTER_VALIDATE_INT);
+$surface = filter_input(INPUT_POST, 'surface', FILTER_VALIDATE_INT);
+$distance = filter_input(INPUT_POST, 'distance', FILTER_VALIDATE_INT);
+$idDevis = filter_input(INPUT_POST, 'idDevis', FILTER_VALIDATE_INT);
+$total = filter_input(INPUT_POST, 'optionTotal', FILTER_VALIDATE_INT);
+$totalm3 = 0;
+
+var_dump($total);
+die;
+
+for ($i = 1; $i < $nbOption; $i++) {
+    $totalm3 += $_POST['qtOption' . $i];
+}
+
 $requete = "UPDATE r_ajouter SET M3 = ( CASE idOption";
 
-for($i = 1;$i<=$nbOption;$i++){
-    $requete .= " WHEN ".$i." THEN ".$_POST['qtOption'.$i];
+for ($i = 1; $i <= $nbOption; $i++) {
+    $requete .= " WHEN " . $i . " THEN " . $_POST['qtOption' . $i];
 }
-$requete .= " END ) WHERE idDevis IN (".$_POST['idDevis'].")";
+$requete .= " END ) WHERE idDevis IN (" . $idDevis . ")";
 
-if(SendQuotation($requete)){
-    if(UpdateQuotation($_POST['idDevis'],$_POST['optionTotal'])){
-        header("Location: devis.php?msg=17");
+if (SendQuotation($requete)) {
+    if (UpdateQuotation($idDevis, $total)) {
+        if (UpdateDetails($lieu, $totalm3, $surface, $poids, $distance, $idDevis))
+            header("Location: devis.php?msg=17");
+        exit;
     }
-    else{
+    else {
         header("Location: devis.php?msg=99");
+        exit;
     }
-}
-else{
+} else {
     header("Location: devis.php?msg=99");
+    exit;
 }
