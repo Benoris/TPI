@@ -60,15 +60,16 @@ function DeleteQuotation($idQuotation) {
     $sql = $db->prepare("DELETE FROM r_ajouter WHERE idDevis = :idQuotation");
     $sql->bindParam(":idQuotation", $idQuotation, PDO::PARAM_INT);
     if ($sql->execute()) {
-        $sql = $db->prepare("DELETE FROM t_devis WHERE idDevis = :idQuotation");
+        $sql = $db->prepare("DELETE FROM t_detail WHERE idDevis = :idQuotation");
         $sql->bindParam(":idQuotation", $idQuotation, PDO::PARAM_INT);
-        if($sql->execute()){
-            $sql = $db->prepare("DELETE FROM t_detail WHERE idDevis = :idQuotation");
-        $sql->bindParam(":idQuotation", $idQuotation, PDO::PARAM_INT);
-        $sql->execute();
+        if ($sql->execute()) {
+            $sql = $db->prepare("DELETE FROM t_devis WHERE idDevis = :idQuotation");
+            $sql->bindParam(":idQuotation", $idQuotation, PDO::PARAM_INT);
+            if($sql->execute()){
+                return true;
+            }
         }
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -157,7 +158,7 @@ function AddDetails($lieu, $volume, $surface, $poids, $distance, $idDevis) {
     }
 }
 
-function UpdateDetails($lieu,$totalm3,$surface,$poids,$distance,$idDevis){
+function UpdateDetails($lieu, $totalm3, $surface, $poids, $distance, $idDevis) {
     $db = connectdb();
     $sql = $db->prepare("UPDATE t_detail SET DescriptionObjetOuLieu = :desc, VolumeApproxM3 = :totalm3, SurfaceApproxM2 = :surface, PoidsKg = :poids, Distance = :distance WHERE idDevis = :idDevis");
     $sql->bindParam(":desc", $lieu, PDO::PARAM_STR);

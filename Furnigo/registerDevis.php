@@ -14,8 +14,7 @@ if (isset($_SESSION['name'])) {
     //Données des options
     $nbOption = filter_input(INPUT_POST, 'nbOption', FILTER_SANITIZE_NUMBER_INT);
     $nbOption = intval($nbOption);
-    $pricetotal = filter_input(INPUT_POST, 'optionTotal', FILTER_SANITIZE_NUMBER_INT);
-    $pricetotal = intval($pricetotal);
+    $pricetotal = filter_input(INPUT_POST, 'optionTotal', FILTER_VALIDATE_FLOAT);
     $idUser = $_SESSION['idUser'];
     $idUser = intval($idUser);
     

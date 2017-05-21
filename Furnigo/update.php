@@ -16,11 +16,9 @@ $poids = filter_input(INPUT_POST, 'poid', FILTER_VALIDATE_INT);
 $surface = filter_input(INPUT_POST, 'surface', FILTER_VALIDATE_INT);
 $distance = filter_input(INPUT_POST, 'distance', FILTER_VALIDATE_INT);
 $idDevis = filter_input(INPUT_POST, 'idDevis', FILTER_VALIDATE_INT);
-$total = filter_input(INPUT_POST, 'optionTotal', FILTER_VALIDATE_INT);
+$total = filter_input(INPUT_POST, 'optionTotal', FILTER_VALIDATE_FLOAT);
 $totalm3 = 0;
 
-var_dump($total);
-die;
 
 for ($i = 1; $i < $nbOption; $i++) {
     $totalm3 += $_POST['qtOption' . $i];
