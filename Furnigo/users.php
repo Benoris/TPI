@@ -59,16 +59,21 @@ function GetUsers(){
 
 function DeleteUser($idUser){
     $devis = GetQuotation($idUser);
+    $db = connectdb();
     foreach($devis as $devi){
-        $db = connectdb();
         $sql = $db->prepare("DELETE FROM r_ajouter WHERE idDevis = :idDevi");
         $sql->bindParam(":idDevi", $devi['idDevis']);
         $sql->execute();
+        $sql = $db->prepare("DELETE FROM `t_detail` WHERE `idDevis` = :idDevis");
+        $sql->bindParam(":idDevis", $devi['idDevis']);
+        $sql->execute();
     }
-    $db = connectdb();
+    
     $sql = $db->prepare("DELETE FROM t_devis WHERE idClient = :idUser");
     $sql->bindParam(":idUser", $idUser, PDO::PARAM_STR);
     $sql->execute();
+    
+    
     $sql = $db->prepare("DELETE FROM t_clients WHERE idClient = :idUser");
     $sql->bindParam(":idUser", $idUser,PDO::PARAM_STR);
     if($sql->execute()){

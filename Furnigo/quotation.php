@@ -7,6 +7,13 @@
  */
 require_once 'dbconnect.php';
 
+/**
+ * 
+ * @param type $pricetotal : La valeure total du devis
+ * @param type $m3total : Le volume total du devis
+ * @param type $idClient : L'id du client qui est lié au devis
+ * @return boolean : Réponse de la fonction false si la requête ne s'exécute pas, sinon return l'id du devis qui vient d'être créer.
+ */
 function CreateQuotation($pricetotal, $m3total, $idClient) {
     $db = connectdb();
     $sql = $db->prepare("INSERT INTO t_devis (Montant,DateDevis,TotalM3,idClient) VALUES (:pricetotal,NOW(),:m3total,:idClient)");
@@ -20,6 +27,11 @@ function CreateQuotation($pricetotal, $m3total, $idClient) {
     }
 }
 
+/**
+ * 
+ * @param type $requete : String de la requête à exécuter
+ * @return boolean : Réponse si la requête à pu être exécuter ou pas
+ */
 function SendQuotation($requete) {
     $db = connectdb();
     $sql = $db->prepare($requete);
@@ -30,6 +42,11 @@ function SendQuotation($requete) {
     }
 }
 
+/**
+ * 
+ * @param type $idUser : L'id de l'utilisateur à qui on veut récupérer ses devis
+ * @return boolean : Si la requête réussie, elle retourne les données sinon, la fonction return false
+ */
 function GetQuotation($idUser) {
     $db = connectdb();
     $sql = $db->prepare("SELECT * FROM t_devis WHERE idClient = :idUser");
@@ -41,6 +58,12 @@ function GetQuotation($idUser) {
     }
 }
 
+/**
+ * Vérifie si un certain devis appartient à un certain utilisateur. Cette fonction est utilisé pour vérifier si le devis à supprimer appartient à l'utilisateur connecté
+ * @param type $idUser : L'id de l'utilisateur à tester
+ * @param type $idQuotation : L'id du devis à vérifier
+ * @return boolean : Return la réponse de la vérification
+ */
 function CheckQuotation($idUser, $idQuotation) {
     $db = connectdb();
     $sql = $db->prepare("SELECT * FROM t_devis WHERE idClient = :idUser AND idDevis = :idQuotation");
@@ -55,6 +78,11 @@ function CheckQuotation($idUser, $idQuotation) {
     }
 }
 
+/**
+ * Cette fonction supprime un devis, ses détails et les options qui est déterminé grâce à l'id que l'on passe en paramètre
+ * @param type $idQuotation : L'id du devis à supprimer
+ * @return boolean : return si toutes les requêtes ont été réussite.
+ */
 function DeleteQuotation($idQuotation) {
     $db = connectdb();
     $sql = $db->prepare("DELETE FROM r_ajouter WHERE idDevis = :idQuotation");
@@ -74,6 +102,12 @@ function DeleteQuotation($idQuotation) {
     }
 }
 
+/**
+ * Cette fonction modifie les données d'une options
+ * @param type $idQuot
+ * @param type $tot
+ * @return boolean
+ */
 function UpdateQuotation($idQuot, $tot) {
     $db = connectdb();
     $sql = $db->prepare("UPDATE `t_devis` SET DateDevis = NOW(), `TotalM3`= (SELECT SUM(M3) FROM r_ajouter WHERE r_ajouter.idDevis = :idQuot), Montant=:tot WHERE idDevis = :idQuot");
