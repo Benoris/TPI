@@ -26,9 +26,9 @@ if (isset($_SESSION['name'])) {
     
     $totalm3 = 0;
     
-    for ($i = 1; $i < $nbOption; $i++) {
-        $totalm3 += $_POST['qtOption' . $i];
-    }
+    for ($i = 1; $i <= $nbOption; $i++) {
+    $totalm3 += $_POST['qtOption' . $i];
+}
     $idDevis = CreateQuotation($pricetotal,$totalm3,$idUser);
     
     

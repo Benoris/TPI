@@ -179,7 +179,7 @@ and open the template in the editor.
                 var total = 0;
                 for (var i = 1; i < nbOpt + 1; i++)
                 {
-                    total += parseInt(document.getElementById("total" + i.toString()).textContent);
+                    total += parseInt(document.getElementById("total" + i).textContent);
                 }
                 
                 var distance = document.getElementById("distance").value;

@@ -20,7 +20,7 @@ $total = filter_input(INPUT_POST, 'optionTotal', FILTER_VALIDATE_FLOAT);
 $totalm3 = 0;
 
 
-for ($i = 1; $i < $nbOption; $i++) {
+for ($i = 1; $i <= $nbOption; $i++) {
     $totalm3 += $_POST['qtOption' . $i];
 }
 
