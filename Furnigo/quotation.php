@@ -1,14 +1,19 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      quotation.php
+Description:
+ * Bibliothèque de fonction du site web Furnigo.
+ * Ce fichier gère toutes les requêtes concernant les devis, donc les détais et les options inclus
+Date:       23/05/2017
  */
+
 require_once 'dbconnect.php';
 
 /**
- * 
+ * Cette fonction créer une requête
  * @param type $pricetotal : La valeure total du devis
  * @param type $m3total : Le volume total du devis
  * @param type $idClient : L'id du client qui est lié au devis
@@ -28,7 +33,7 @@ function CreateQuotation($pricetotal, $m3total, $idClient) {
 }
 
 /**
- * 
+ * Cette fonction qui exécute une requête passé en paramètre
  * @param type $requete : String de la requête à exécuter
  * @return boolean : Réponse si la requête à pu être exécuter ou pas
  */
@@ -43,7 +48,7 @@ function SendQuotation($requete) {
 }
 
 /**
- * 
+ * Cette requête récupère les devis lié à un utilisateur.
  * @param type $idUser : L'id de l'utilisateur à qui on veut récupérer ses devis
  * @return boolean : Si la requête réussie, elle retourne les données sinon, la fonction return false
  */
@@ -103,10 +108,10 @@ function DeleteQuotation($idQuotation) {
 }
 
 /**
- * Cette fonction modifie les données d'une options
- * @param type $idQuot
- * @param type $tot
- * @return boolean
+ * Cette fonction modifie les données des options d'un devis que l'on passe en paramètre
+ * @param type $idQuot : id du devis à modifier
+ * @param type $tot : Nouvelle somme totale du devis
+ * @return boolean : return si la requête s'est exécuté avec succès
  */
 function UpdateQuotation($idQuot, $tot) {
     $db = connectdb();
@@ -120,6 +125,11 @@ function UpdateQuotation($idQuot, $tot) {
     }
 }
 
+
+/**
+ * Récupère toutes les options disponibles et les retournes
+ * @return type FETCH_ASSOC t_options
+ */
 function GetOptions() {
     $db = connectdb();
     $sql = $db->prepare("SELECT * FROM t_options");
@@ -127,6 +137,15 @@ function GetOptions() {
     return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+/**
+ * Cette fonction sert à modifier une option dans la table t_option
+ * @param type $idOption : id de l'option à modifier
+ * @param type $desc : Nouvelle description à remplacer
+ * @param type $prix : Nouveau prix
+ * @param type $pm3 : Nouveau prix par M3
+ * @return boolean : Réponse de la base de donnée
+ */
 function UpdateOption($idOption, $desc, $prix, $pm3) {
     $db = connectdb();
     $sql = $db->prepare("UPDATE t_options SET DescriptionDetaillee = :desc, PrixSupplementDeBase = :prix, PrixAuM3 = :pm3 WHERE idOption = :idOption");
@@ -141,6 +160,11 @@ function UpdateOption($idOption, $desc, $prix, $pm3) {
     }
 }
 
+/**
+ * Récupère les informations d'une option selon son id
+ * @param type $idOption : id de l'option à récupérer
+ * @return boolean : retourne les donnée de l'option ou false
+ */
 function GetOptionById($idOption) {
     $db = connectdb();
     $sql = $db->prepare("SELECT * FROM t_options WHERE idOption = :idOption");
@@ -152,6 +176,12 @@ function GetOptionById($idOption) {
     }
 }
 
+
+/**
+ * Supprime une option à l'aide de son id
+ * @param type $idOption : L'id de l'option à supprimer
+ * @return boolean : Réponse de la base de donnée
+ */
 function DeleteOption($idOption) {
     $db = connectdb();
     $sql = $db->prepare("DELETE FROM t_options WHERE idOption = :idoption");
@@ -163,6 +193,13 @@ function DeleteOption($idOption) {
     }
 }
 
+/**
+ * Créer une nouvelle option
+ * @param type $description : Description de la nouvelle option
+ * @param type $supp : Prix supplémentaire de la nouvelle option
+ * @param type $pm3 : Prix par M carré de la nouvelle option
+ * @return boolean : retourne si la requête s'est bien exécuté
+ */
 function CreateOption($description, $supp, $pm3) {
     $db = connectdb();
     $sql = $db->prepare("INSERT INTO t_options (DescriptionDetaillee,PrixSupplementDeBase,PrixAuM3) VALUE(:desc,:supp,:pm3)");
@@ -176,6 +213,16 @@ function CreateOption($description, $supp, $pm3) {
     }
 }
 
+/**
+ * Ajoute les détails du nouveau devis à la table t_detail
+ * @param type $lieu : Lieu à déménager
+ * @param type $volume : Volume total du meubilier à déménager
+ * @param type $surface : Surface total du lieu à déménager
+ * @param type $poids : Poids total des meubiliers
+ * @param type $distance : Distance jusqu'à la destination en Km
+ * @param type $idDevis : id du devis lié au détail à créer
+ * @return boolean return si la requête a pu être exécuté
+ */
 function AddDetails($lieu, $volume, $surface, $poids, $distance, $idDevis) {
     $db = connectdb();
     $sql = $db->prepare("INSERT INTO t_detail (DescriptionObjetOuLieu,VolumeApproxM3,SurfaceApproxM2,PoidsKg,Distance,idDevis) VALUE(:lieu,:volume,:surface,:poids,:distance,:idDevis)");
@@ -192,6 +239,16 @@ function AddDetails($lieu, $volume, $surface, $poids, $distance, $idDevis) {
     }
 }
 
+/**
+ * Cette fonction sert à modifier des détails d'un devis
+ * @param type $lieu : Nouveau lieu
+ * @param type $totalm3 : Nouvelle valeur du volume total du devis
+ * @param type $surface : Nouvelle valeur de la surface total du devis
+ * @param type $poids : Nouvelle valeur du poids total du devis
+ * @param type $distance : Nouvelle valeur pour la distance du déménagement
+ * @param type $idDevis : id du devis à modifier
+ * @return boolean : Retourne la réponse de la base de donnée si la requête s'est exécuté avec succès
+ */
 function UpdateDetails($lieu, $totalm3, $surface, $poids, $distance, $idDevis) {
     $db = connectdb();
     $sql = $db->prepare("UPDATE t_detail SET DescriptionObjetOuLieu = :desc, VolumeApproxM3 = :totalm3, SurfaceApproxM2 = :surface, PoidsKg = :poids, Distance = :distance WHERE idDevis = :idDevis");
