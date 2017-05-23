@@ -17,7 +17,7 @@ require_once 'dbconnect.php';
 function CreateQuotation($pricetotal, $m3total, $idClient) {
     $db = connectdb();
     $sql = $db->prepare("INSERT INTO t_devis (Montant,DateDevis,TotalM3,idClient) VALUES (:pricetotal,NOW(),:m3total,:idClient)");
-    $sql->bindParam(':pricetotal', $pricetotal, PDO::PARAM_INT);
+    $sql->bindParam(':pricetotal', $pricetotal);
     $sql->bindParam(':m3total', $m3total, PDO::PARAM_INT);
     $sql->bindParam(':idClient', $idClient, PDO::PARAM_INT);
     if ($sql->execute()) {
