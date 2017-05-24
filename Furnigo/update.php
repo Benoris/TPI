@@ -1,12 +1,12 @@
 <?php
 
 /*
-Projet: Site de déménagement
-Auteur:     Maurice Dinh
-Classe:     I.IN-P4B
-Titre:      update.php
-Description: Page de modification des options d'un devis
-Date:       24/05/2017
+  Projet: Site de déménagement
+  Auteur:     Maurice Dinh
+  Classe:     I.IN-P4B
+  Titre:      update.php
+  Description: Page de modification des options d'un devis
+  Date:       24/05/2017
  */
 
 require_once 'quotation.php';

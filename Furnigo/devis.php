@@ -1,12 +1,12 @@
 <?php
 /*
-Projet: Site de déménagement
-Auteur:     Maurice Dinh
-Classe:     I.IN-P4B
-Titre:      devis.php
-Description: Page d'affichage des devis de l'utilisateur connecté
+  Projet: Site de déménagement
+  Auteur:     Maurice Dinh
+  Classe:     I.IN-P4B
+  Titre:      devis.php
+  Description: Page d'affichage des devis de l'utilisateur connecté
  * Uniquement disponible lorsque l'on est connecté
-Date:       24/05/2017
+  Date:       24/05/2017
  */
 
 require_once 'quotation.php';
@@ -21,28 +21,36 @@ if (!isset($_SESSION['name'])) {
 $devis = GetQuotation($_SESSION['idUser']);
 
 if (isset($_GET['id'])) {
-    $id = filter_input(INPUT_GET, 'id',FILTER_VALIDATE_INT);
-    echo $id;
-    if ($id != null) {
-        $result = DeleteQuotation($id);
-        if($result == false){
-            $msg = "Impossible de supprimer le devis!";
+    if (CheckQuotation($_SESSION['idUser'], $_GET['id'])) {
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        echo $id;
+        if ($id != null) {
+            $result = DeleteQuotation($id);
+            if ($result == false) {
+                header("Location:devis.php?msg=2");
+                exit;
+            } else {
+                header("Location:devis.php?msg=1");
+                exit;
+            }
         }
-        else{
-            $msg = "Suppression réussie!";
-        }
-            header("Location:devis.php");
-            exit;
+    } else {
+        header("Location: devis.php?msg=55");
+        exit;
     }
-    
 }
-if(isset($_GET['msg'])){
+if (isset($_GET['msg'])) {
     $code = $_GET['msg'];
-    if($code = 17){
+    if ($code == 17) {
         $msg = "Modification réussie!";
-    }
-    elseif($code = 99){
+    } elseif ($code == 99) {
         $msg = "Erreure lors de la modification!";
+    } elseif ($code == 55) {
+        $msg = "Ce devis ne vous appartient pas!";
+    } elseif ($code == 1) {
+        $msg = "Suppression réussie!";
+    } elseif ($code == 2) {
+        $msg = "Erreur lors de la suppression!";
     }
 }
 ?>
@@ -66,8 +74,8 @@ and open the template in the editor.
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
-                <?php if(!isset($_SESSION['name'])): ?>
-                <li><a href="connexion.php">Connexion</a></li>
+                <?php if (!isset($_SESSION['name'])): ?>
+                    <li><a href="connexion.php">Connexion</a></li>
                 <?php endif; ?>
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php" class="active">Mes devis</a></li>
@@ -82,10 +90,11 @@ and open the template in the editor.
         </nav>
         <div id="content">
             <?php echo "<h1>Bienvenue sur vos devis " . $_SESSION['name'] . '</h1>'; ?>
-            <?php if(isset($msg)){
+            <?php
+            if (isset($msg)) {
                 echo $msg;
             }
-?>
+            ?>
             <table border="1" width="100%">
                 <th>N°</th>
                 <th>Date du devis</th>
@@ -104,7 +113,8 @@ and open the template in the editor.
                         <td style="text-align: center"><a href="devis.php?id=<?php echo $devi['idDevis'] ?>">Supprimer</a></td>
                         <td style="text-align: center"><a href="modifier.php?id=<?php echo $devi['idDevis'] ?>">Modifier</a></td>
                     </tr>
-                    <?php $persoCounter++;
+                    <?php
+                    $persoCounter++;
                 endforeach;
                 ?>
             </table>

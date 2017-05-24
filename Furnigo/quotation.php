@@ -1,13 +1,13 @@
 <?php
 
 /*
-Auteur:     Maurice Dinh
-Classe:     I.IN-P4B
-Titre:      quotation.php
-Description:
+  Auteur:     Maurice Dinh
+  Classe:     I.IN-P4B
+  Titre:      quotation.php
+  Description:
  * Bibliothèque de fonction du site web Furnigo.
  * Ce fichier gère toutes les requêtes concernant les devis, donc les détais et les options inclus
-Date:       23/05/2017
+  Date:       23/05/2017
  */
 
 require_once 'dbconnect.php';
@@ -98,7 +98,7 @@ function DeleteQuotation($idQuotation) {
         if ($sql->execute()) {
             $sql = $db->prepare("DELETE FROM t_devis WHERE idDevis = :idQuotation");
             $sql->bindParam(":idQuotation", $idQuotation, PDO::PARAM_INT);
-            if($sql->execute()){
+            if ($sql->execute()) {
                 return true;
             }
         }
@@ -125,7 +125,6 @@ function UpdateQuotation($idQuot, $tot) {
     }
 }
 
-
 /**
  * Récupère toutes les options disponibles et les retournes
  * @return type FETCH_ASSOC t_options
@@ -136,7 +135,6 @@ function GetOptions() {
     $sql->execute();
     return $sql->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 /**
  * Cette fonction sert à modifier une option dans la table t_option
@@ -175,7 +173,6 @@ function GetOptionById($idOption) {
         return false;
     }
 }
-
 
 /**
  * Supprime une option à l'aide de son id

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 19 Mai 2017 à 16:43
+-- Généré le :  Mer 24 Mai 2017 à 17:00
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
@@ -39,102 +39,70 @@ CREATE TABLE IF NOT EXISTS `r_ajouter` (
 --
 
 INSERT INTO `r_ajouter` (`idDevis`, `idOption`, `M3`) VALUES
-(11, 1, 1),
-(11, 2, 2),
-(11, 3, 3),
-(11, 4, 4),
-(11, 5, 5),
-(11, 6, 1),
-(11, 7, 0),
-(11, 8, 0),
-(11, 9, 0),
-(11, 10, 0),
-(11, 11, 0),
-(11, 12, 0),
-(11, 13, 0),
-(11, 14, 0),
-(11, 15, 0),
-(11, 16, 0),
-(11, 17, 0),
-(11, 18, 0),
-(11, 19, 0),
-(11, 20, 0),
-(11, 21, 0),
-(11, 22, 0),
-(11, 23, 0),
-(11, 24, 0),
-(11, 25, 0),
-(11, 26, 0),
-(11, 27, 0),
-(11, 28, 0),
-(11, 29, 0),
-(11, 30, 0),
-(11, 31, 0),
-(11, 32, 0),
-(16, 1, 0),
-(16, 2, 0),
-(16, 3, 0),
-(16, 4, 0),
-(16, 5, 0),
-(16, 6, 0),
-(16, 7, 0),
-(16, 8, 0),
-(16, 9, 0),
-(16, 10, 0),
-(16, 11, 0),
-(16, 12, 0),
-(16, 13, 0),
-(16, 14, 0),
-(16, 15, 0),
-(16, 16, 0),
-(16, 17, 0),
-(16, 18, 0),
-(16, 19, 0),
-(16, 20, 0),
-(16, 21, 0),
-(16, 22, 0),
-(16, 23, 0),
-(16, 24, 0),
-(16, 25, 0),
-(16, 26, 0),
-(16, 27, 0),
-(16, 28, 0),
-(16, 29, 0),
-(16, 30, 0),
-(16, 31, 0),
-(16, 32, 5),
-(17, 1, 4),
-(17, 2, 0),
-(17, 3, 0),
-(17, 4, 0),
-(17, 5, 0),
-(17, 6, 0),
-(17, 7, 0),
-(17, 8, 0),
-(17, 9, 0),
-(17, 10, 0),
-(17, 11, 0),
-(17, 12, 0),
-(17, 13, 0),
-(17, 14, 0),
-(17, 15, 0),
-(17, 16, 0),
-(17, 17, 0),
-(17, 18, 0),
-(17, 19, 0),
-(17, 20, 0),
-(17, 21, 0),
-(17, 22, 0),
-(17, 23, 0),
-(17, 24, 0),
-(17, 25, 0),
-(17, 26, 0),
-(17, 27, 0),
-(17, 28, 0),
-(17, 29, 0),
-(17, 30, 0),
-(17, 31, 0),
-(17, 32, 0);
+(1, 1, 0),
+(1, 2, 0),
+(1, 3, 0),
+(1, 4, 3),
+(1, 5, 3),
+(1, 6, 0),
+(1, 7, 0),
+(1, 8, 0),
+(1, 9, 0),
+(1, 10, 0),
+(1, 11, 0),
+(1, 12, 0),
+(1, 13, 0),
+(1, 14, 0),
+(1, 15, 0),
+(1, 16, 0),
+(1, 17, 0),
+(1, 18, 0),
+(1, 19, 0),
+(1, 20, 0),
+(1, 21, 0),
+(1, 22, 0),
+(1, 23, 0),
+(1, 24, 0),
+(1, 25, 0),
+(1, 26, 0),
+(1, 27, 0),
+(1, 28, 0),
+(1, 29, 0),
+(1, 30, 0),
+(1, 31, 0),
+(1, 32, 0),
+(3, 1, 0),
+(3, 2, 0),
+(3, 3, 0),
+(3, 4, 0),
+(3, 5, 0),
+(3, 6, 0),
+(3, 7, 0),
+(3, 8, 0),
+(3, 9, 0),
+(3, 10, 0),
+(3, 11, 2),
+(3, 12, 2),
+(3, 13, 0),
+(3, 14, 0),
+(3, 15, 0),
+(3, 16, 0),
+(3, 17, 0),
+(3, 18, 0),
+(3, 19, 0),
+(3, 20, 0),
+(3, 21, 0),
+(3, 22, 0),
+(3, 23, 0),
+(3, 24, 0),
+(3, 25, 0),
+(3, 26, 0),
+(3, 27, 0),
+(3, 28, 0),
+(3, 29, 0),
+(3, 30, 0),
+(3, 31, 0),
+(3, 32, 1);
 
 -- --------------------------------------------------------
 
@@ -150,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
   `UserMode` tinyint(1) NOT NULL,
   PRIMARY KEY (`idClient`),
   UNIQUE KEY `Login` (`Login`,`Email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `t_clients`
@@ -158,8 +126,7 @@ CREATE TABLE IF NOT EXISTS `t_clients` (
 
 INSERT INTO `t_clients` (`idClient`, `Login`, `Email`, `Password`, `UserMode`) VALUES
 (1, 'admin', 'admin@furnigo.com', 'f6889fc97e14b42dec11a8c183ea791c5465b658', 1),
-(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0),
-(4, 'hack', 'hacker@dfd.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 0);
+(2, 'Tony', 'maurice.dinh@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
 
 -- --------------------------------------------------------
 
@@ -177,16 +144,15 @@ CREATE TABLE IF NOT EXISTS `t_detail` (
   `idDevis` int(11) NOT NULL,
   PRIMARY KEY (`idDetail`),
   KEY `FK_T_DETAIL_idDevis_T_DEVIS` (`idDevis`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `t_detail`
 --
 
 INSERT INTO `t_detail` (`idDetail`, `DescriptionObjetOuLieu`, `VolumeApproxM3`, `SurfaceApproxM2`, `PoidsKg`, `Distance`, `idDevis`) VALUES
-(11, 'Manoir Van Holten', 7000, 1000, 40000, 150, 11),
-(15, 'asdfasfadfa', 0, 2, 2, 7, 16),
-(16, '', 4, 0, 0, 5, 17);
+(1, 'fasdf', 6, 0, 0, 4, 1),
+(3, 'asfasdasdf', 5, 0, 0, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -196,22 +162,21 @@ INSERT INTO `t_detail` (`idDetail`, `DescriptionObjetOuLieu`, `VolumeApproxM3`, 
 
 CREATE TABLE IF NOT EXISTS `t_devis` (
   `idDevis` int(11) NOT NULL AUTO_INCREMENT,
-  `Montant` int(11) NOT NULL,
+  `Montant` float NOT NULL,
   `DateDevis` date NOT NULL,
   `TotalM3` int(11) NOT NULL,
   `idClient` int(11) NOT NULL,
   PRIMARY KEY (`idDevis`),
   KEY `FK_T_DEVIS_idClient` (`idClient`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;
 
 --
 -- Contenu de la table `t_devis`
 --
 
 INSERT INTO `t_devis` (`idDevis`, `Montant`, `DateDevis`, `TotalM3`, `idClient`) VALUES
-(11, 3045, '2017-05-18', 16, 2),
-(16, 0, '2017-05-19', 5, 4),
-(17, 162000, '2017-05-19', 4, 4);
+(1, 2313.88, '2017-05-24', 6, 1),
+(3, 2552.35, '2017-05-24', 5, 2);
 
 -- --------------------------------------------------------
 
@@ -249,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `t_options` (
   `PrixSupplementDeBase` float NOT NULL,
   `PrixAuM3` float NOT NULL,
   PRIMARY KEY (`idOption`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=36 ;
 
 --
 -- Contenu de la table `t_options`
@@ -287,7 +252,8 @@ INSERT INTO `t_options` (`idOption`, `DescriptionDetaillee`, `PrixSupplementDeBa
 (29, 'Décrochage des lustres et glaces', 100, 70),
 (30, 'Démontage des éléments de cuisine', 100, 50),
 (31, 'Déconnexion et reconnexion électriques des appareils électroménagers, hi-fi, informatique, vidéo, \r\ntélévision, etc.', 80, 10),
-(32, 'Déconnexion et reconnexion des alimentations en eaux et des appareils électroménagers (Les contrôles \r\nde sécurité des installations après le départ des déménageurs sont à la charge exclusive du client)', 150, 80);
+(32, 'Déconnexion et reconnexion des alimentations en eaux et des appareils électroménagers (Les contrôles \r\nde sécurité des installations après le départ des déménageurs sont à la charge exclusive du client)', 150, 80),
+(35, 'Démontage des meubles et remontage à l&#39;arrivée', 150, 50);
 
 --
 -- Contraintes pour les tables exportées

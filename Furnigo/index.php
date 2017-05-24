@@ -1,14 +1,14 @@
 <?php
 /*
-Auteur:     Maurice Dinh
-Classe:     I.IN-P4B
-Titre:      index.php
-Description:Fichier index (Accueil) du site web Furnigo
-Date:       10/05/2017
+  Auteur:     Maurice Dinh
+  Classe:     I.IN-P4B
+  Titre:      index.php
+  Description:Fichier index (Accueil) du site web Furnigo
+  Date:       10/05/2017
  */
-if(!isset($_SESSION['name'])){
+if (!isset($_SESSION['name'])) {
     session_start();
-    if(isset($_SESSION['mode'])){
+    if (isset($_SESSION['mode'])) {
         $mode = $_SESSION['mode'];
     }
 }
@@ -24,7 +24,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="icon" type="image/png" href="img/favicon.ico">
-        
+
         <title>Furnigo</title>
     </head>
     <body>
@@ -33,17 +33,17 @@ and open the template in the editor.
         <nav>
             <ul>
                 <li><a href="index.php" class="active">Accueil</a></li>
-                <?php if(!isset($_SESSION['name'])): ?>
-                <li><a href="connexion.php">Connexion</a></li>
+                <?php if (!isset($_SESSION['name'])): ?>
+                    <li><a href="connexion.php">Connexion</a></li>
                 <?php endif; ?>
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php">Calculateur de devis</a></li>
-                <?php if(isset($_SESSION['name']) && $mode == 1){ ?>
-                <li><a href="adminuser.php">Administration</a></li>
+                <?php if (isset($_SESSION['name']) && $mode == 1) { ?>
+                    <li><a href="adminuser.php">Administration</a></li>
                 <?php } ?>
-                <?php if(isset($_SESSION['name'])){?>
-                <li><a href="logout.php">Déconnexion</a></li>
+                <?php if (isset($_SESSION['name'])) { ?>
+                    <li><a href="logout.php">Déconnexion</a></li>
                 <?php } ?>
             </ul>
         </nav>

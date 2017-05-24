@@ -1,11 +1,11 @@
 <?php
 /*
-Projet: Site de déménagement
-Auteur:     Maurice Dinh
-Classe:     I.IN-P4B
-Titre:      modifieroption.php
-Description: Formulaire de modification d'une option
-Date:       24/05/2017
+  Projet: Site de déménagement
+  Auteur:     Maurice Dinh
+  Classe:     I.IN-P4B
+  Titre:      modifieroption.php
+  Description: Formulaire de modification d'une option
+  Date:       24/05/2017
  */
 
 require_once 'quotation.php';
@@ -18,7 +18,6 @@ if (!isset($_SESSION['name'])) {
         $mode = $_SESSION['mode'];
     }
 }
-
 ?>
 <!DOCTYPE html>
 <!--

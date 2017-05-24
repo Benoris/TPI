@@ -1,12 +1,17 @@
 <?php
 /*
-Projet: Site de déménagement
-Auteur:     Maurice Dinh
-Classe:     I.IN-P4B
-Titre:      modifier.php
-Description: Page d'affichage des modification d'un devis
-Date:       24/05/2017
+  Projet: Site de déménagement
+  Auteur:     Maurice Dinh
+  Classe:     I.IN-P4B
+  Titre:      modifier.php
+  Description: Page d'affichage des modification d'un devis
+  Date:       24/05/2017
  */
+
+require_once 'quotation.php';
+require_once 'command.php';
+
+$options = "";
 
 if (!isset($_SESSION['name'])) {
     session_start();
@@ -14,22 +19,23 @@ if (!isset($_SESSION['name'])) {
         $mode = $_SESSION['mode'];
     }
 }
-require_once 'command.php';
-$optionForfait = GetForfait();
-$options = GetOptions();
-
 if (isset($_GET['id'])) {
-    $idDevi = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-    $deviClient = GetOption($idDevi);
-    $detail = GetDetail($idDevi);
+    if (CheckQuotation($_SESSION['idUser'], $_GET['id'])) {
+        $optionForfait = GetForfait();
+        $options = GetOptions();
+        $idDevi = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $deviClient = GetOption($idDevi);
+        $detail = GetDetail($idDevi);
+    } else {
+        header("Location: devis.php?msg=55");
+        exit;
+    }
+} else {
+    header("Location: devis.php?msg=99");
+    exit;
 }
 ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -43,7 +49,9 @@ and open the template in the editor.
         <nav>
             <ul>
                 <li><a href="index.php">Accueil</a></li>
-                <li><a href="connexion.php">Connexion</a></li>
+                <?php if (!isset($_SESSION['name'])): ?>
+                    <li><a href="connexion.php">Connexion</a></li>
+                <?php endif; ?>
                 <li><a href="inscription.php">S'inscrire</a></li>
                 <li><a href="devis.php">Mes devis</a></li>
                 <li><a href="calculateur.php" class="active">Calculateur de devis</a></li>
@@ -117,7 +125,7 @@ and open the template in the editor.
                         $i++;
                         ?>
                     <?php endforeach; ?>
-                        <tr>
+                    <tr>
                         <td colspan="5" style="text-align: center">
                             <table>
                                 <tr>
@@ -141,7 +149,7 @@ and open the template in the editor.
                     </tr>
                     <tr>
                         <td colspan="2"></td>
-                        <td><input type="submit" name="sendOption"></td>
+                        <td><input type="submit" name="sendOption" value="Modifier"></td>
                         <td>Total</td>
                         <td id="totaldevis"></td>
                     </tr>
@@ -154,54 +162,54 @@ and open the template in the editor.
         </div>
     </center>
     <script type="text/javascript">
-            var nbOpt = parseInt(document.getElementById("nbOption").value);
-            //S'il y a un bug, set le i de la boucle à 1
-            for (i = 1; i < nbOpt; i++) {
-                var qt = parseInt(document.getElementById("qt" + i).value);
-                if (qt != 0) {
-                    var supp = parseInt(document.getElementById("supplement" + i).textContent);
-                    var pq = parseInt(document.getElementById("pm3" + i).textContent);
-                    var tot = qt * pq + supp;
-                    document.getElementById("total" + i).innerHTML = tot.toString();
-                }
-                else {
-                    document.getElementById("total" + i).textContent = "0";
-                }
+        var nbOpt = parseInt(document.getElementById("nbOption").value);
+        //S'il y a un bug, set le i de la boucle à 1
+        for (i = 1; i < nbOpt; i++) {
+            var qt = parseInt(document.getElementById("qt" + i).value);
+            if (qt != 0) {
+                var supp = parseInt(document.getElementById("supplement" + i).textContent);
+                var pq = parseInt(document.getElementById("pm3" + i).textContent);
+                var tot = qt * pq + supp;
+                document.getElementById("total" + i).innerHTML = tot.toString();
+            }
+            else {
+                document.getElementById("total" + i).textContent = "0";
+            }
+        }
+
+        document.getElementById("optionTotal").value = CalculTotal().toString();
+        document.getElementById("totaldevis").textContent = CalculTotal().toString();
+        document.getElementById("optionTotal").value = CalculTotal().toString();
+        console.log(CalculTotal().toString());
+
+
+        function CalculTotal() {
+            var total = 0;
+            for (var i = 1; i < nbOpt + 1; i++)
+            {
+                total += parseInt(document.getElementById("total" + i.toString()).textContent);
             }
 
-            document.getElementById("optionTotal").value = CalculTotal().toString();
-            document.getElementById("totaldevis").textContent = CalculTotal().toString();
-            document.getElementById("optionTotal").value = CalculTotal().toString();
-            console.log(CalculTotal().toString());
+            var distance = document.getElementById("distance").value;
 
+            total += GetTotalM3() * distance * 0.007;
 
-            function CalculTotal() {
-                var total = 0;
-                for (var i = 1; i < nbOpt + 1; i++)
-                {
-                    total += parseInt(document.getElementById("total" + i.toString()).textContent);
-                }
-                
-                var distance = document.getElementById("distance").value;
-                
-                total += GetTotalM3() * distance * 0.007;
-                
-                var forfait = document.getElementById("forfait");
-                var selectedforfait = parseInt(forfait.options[forfait.selectedIndex].value);
-                
-                if (selectedforfait === 1) {
-                    total += 1500;
-                }
-                else if (selectedforfait === 2) {
-                    total += 1000;
-                }
-                else if (selectedforfait === 3) {
-                    total += 750;
-                }
-                else if (selectedforfait === 4) {
-                    total += 500;
-                }
-                return total.toFixed(2);
+            var forfait = document.getElementById("forfait");
+            var selectedforfait = parseInt(forfait.options[forfait.selectedIndex].value);
+
+            if (selectedforfait === 1) {
+                total += 1500;
+            }
+            else if (selectedforfait === 2) {
+                total += 1000;
+            }
+            else if (selectedforfait === 3) {
+                total += 750;
+            }
+            else if (selectedforfait === 4) {
+                total += 500;
+            }
+            return total.toFixed(2);
         }
         function ShowResult(id) {
             if (document.getElementById("qt" + id).value == "") {
@@ -234,16 +242,16 @@ and open the template in the editor.
                 return qt * unit + supp;
             }
         }
-        function GetTotalM3(){
+        function GetTotalM3() {
             var totalVolume = 0;
-            for(i = 1; i<=nbOpt;i++){
-                totalVolume += parseInt(document.getElementById("pm3"+i).textContent);
+            for (i = 1; i <= nbOpt; i++) {
+                totalVolume += parseInt(document.getElementById("pm3" + i).textContent);
             }
             return totalVolume;
         }
-        function ShowTotal(){
+        function ShowTotal() {
             var tot = CalculTotal();
- 
+
             document.getElementById("totaldevis").innerHTML = tot.toString();
             document.getElementById("optionTotal").value = tot.toString();
         }
