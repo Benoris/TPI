@@ -1,4 +1,13 @@
 <?php
+/*
+Projet: Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      modifier.php
+Description: Page d'affichage des modification d'un devis
+Date:       24/05/2017
+ */
+
 if (!isset($_SESSION['name'])) {
     session_start();
     if (isset($_SESSION['mode'])) {

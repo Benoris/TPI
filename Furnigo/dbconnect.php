@@ -1,10 +1,14 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*
+Projet: Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      dbconnect.php
+Description: Page de connexion à la base de données par PDO
+Date:       24/05/2017
  */
+
 DEFINE('DB_HOST', "127.0.0.1");
 DEFINE('DB_NAME', "db_demenagement");
 DEFINE('DB_USER', "FurnigoUser");

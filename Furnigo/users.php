@@ -1,9 +1,13 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      users.php
+Description:
+ * Bibliothèque de fonction des utilisateurs du site web Furnigo.
+ * Ce fichier gère toutes les requêtes concernant les utilisateurs, la création, la connexion, la vérification et suppression
+Date:       23/05/2017
  */
 
 require_once 'dbconnect.php';
@@ -19,6 +23,12 @@ function ifAdmin($mode){
     }
 }
 
+/**
+ * Vérifie la validité des informations d'un formulaire pour connexion
+ * @param type $Login : Pseudo de l'utilisateur à loguer
+ * @param type $pwd : Mot de passe de l'utilisateur à loguer
+ * @return type : Si la connexion réussie, retourne les information de l'utilisateur.
+ */
 function CheckUserId($Login,$pwd){
     $db = connectdb();
     $sql = $db->prepare("SELECT idClient,Login,UserMode FROM t_clients WHERE Login = :pseudo AND Password = :pwd");
@@ -32,6 +42,13 @@ function CheckUserId($Login,$pwd){
     return $result; 
 }
 
+/**
+ * Fonction d'ajout d'un utilisateur
+ * @param type $pseudo : Pseudo de l'utilisateur à créer
+ * @param type $mail : Adresse email de l'utilisateur à créer
+ * @param type $pwd : Mot de passe de l'utilisaateur à créer
+ * @return boolean : Retourne si la requête s'est exécutée avec succès
+ */
 function AddUser($pseudo,$mail,$pwd){
     $db = connectdb();
     $sql = $db->prepare("INSERT INTO `t_clients`(`Login`, `Email`, `Password`) VALUES (:pseudo,:mail,:pwd)");
@@ -46,6 +63,10 @@ function AddUser($pseudo,$mail,$pwd){
     }
 }
 
+/**
+ * Fonction de récupèration des utilisateur non admin
+ * @return type retourne la liste des utilisateurs
+ */
 function GetUsers(){
     $db = connectdb();
     $sql = $db->prepare("SELECT idClient,Login,Email FROM t_clients WHERE UserMode != 1");
@@ -57,6 +78,11 @@ function GetUsers(){
     }
 }
 
+/**
+ * Fonction de suppression d'un utilisateur
+ * @param type $idUser : L'id de l'utilisateur à supprimmer
+ * @return boolean : Retourn le résultat de la requête
+ */
 function DeleteUser($idUser){
     $devis = GetQuotation($idUser);
     $db = connectdb();

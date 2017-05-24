@@ -1,10 +1,14 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Projet:     Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      registerDevis.php
+Description: Page de redirection des données du formulaire de création d'un devis.
+Date:       24/05/2017
  */
+
 if($_POST['optionTotal']!=0){
     
 

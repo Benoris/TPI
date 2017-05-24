@@ -1,4 +1,14 @@
 <?php
+/*
+Projet: Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      devis.php
+Description: Page d'affichage des devis de l'utilisateur connecté
+ * Uniquement disponible lorsque l'on est connecté
+Date:       24/05/2017
+ */
+
 require_once 'quotation.php';
 if (!isset($_SESSION['name'])) {
     session_start();

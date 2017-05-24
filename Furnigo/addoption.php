@@ -1,11 +1,12 @@
 <?php
 
 /*
+Projet: Site de déménagement
 Auteur:     Maurice Dinh
 Classe:     I.IN-P4B
-Titre:      index.php
-Description: Fichier de redirection d'ajout d'une option
-Date:       10/05/2017
+Titre:      addoption.php
+Description: Fichier d'ajout d'une option suivie d'une redirection avec un message
+Date:       24/05/2017
  */
 
 require_once 'quotation.php';

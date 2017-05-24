@@ -1,4 +1,13 @@
 <?php
+/*
+Projet: Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      adminoptions.php
+Description: Page de gestion d'options accessible seulement en administrateur
+Date:       24/05/2017
+ */
+
 require_once 'quotation.php';
 require_once 'users.php';
 

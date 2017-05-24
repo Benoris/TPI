@@ -1,10 +1,14 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*
+Projet: Site de déménagement
+Auteur:     Exemple fonctionel de déconnection du site php
+Classe:     I.IN-P4B
+Titre:      logout.php
+Description: http://php.net/manual/fr/function.session-destroy.php
+Date:       24/05/2017
  */
+
 session_start();
 if($_SESSION['name'] != '') {
 

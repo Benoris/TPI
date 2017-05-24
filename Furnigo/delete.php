@@ -1,9 +1,12 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*
+Projet: Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      delete.php
+Description: Page de suppression d'un utilisateur et de redirection avec message
+Date:       24/05/2017
  */
 
 if(!isset($_SESSION['name'])){

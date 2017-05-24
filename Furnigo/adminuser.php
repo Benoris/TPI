@@ -1,10 +1,11 @@
 <?php
 /*
+Projet: Site de déménagement
 Auteur:     Maurice Dinh
 Classe:     I.IN-P4B
-Titre:      index.php
-Description: Fichier de la vue de l'interface de gestion d'utilisateur pour l'administrateur de Furnigo
-Date:       18/05/2017
+Titre:      adminuser.php
+Description: Page de gestion d'utilisateurs uniquement disponible en administrateur
+Date:       24/05/2017
  */
 require_once 'users.php';
 

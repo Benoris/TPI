@@ -1,10 +1,20 @@
 <?php
+/*
+Projet: Site de déménagement
+Auteur:     Maurice Dinh
+Classe:     I.IN-P4B
+Titre:      calculateur.php
+Description: Page du calculateur de devis du site. Contient un formulaire permettant de créer un devis
+Date:       24/05/2017
+ */
+
 if(!isset($_SESSION['name'])){
     session_start();
     if(isset($_SESSION['mode'])){
         $mode = $_SESSION['mode'];
     }
 }
+require_once 'quotation.php';
 require_once 'command.php';
 $optionForfait = GetForfait();
 $options = GetOptions();
