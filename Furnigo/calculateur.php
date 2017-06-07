@@ -88,7 +88,7 @@ and open the template in the editor.
                             <td><?= $opt['DescriptionDetaillee'] ?></td>
                             <td style="text-align: center" id="supplement<?php echo $opt['idOption'] ?>"><?= $opt['PrixSupplementDeBase'] ?></td>
                             <td style="text-align: center" id="pm3<?php echo $opt['idOption'] ?>"><?= $opt['PrixAuM3'] ?></td>
-                            <td style="text-align: center" id="total<?php echo $opt['idOption'] ?>" value="">0</td>
+                            <td style="text-align: center" id="total<?php echo $opt['idOption'] ?>">0</td>
                         </tr>
                         <?php
                         if ($i == 11) {
@@ -187,9 +187,10 @@ and open the template in the editor.
 
         function CalculTotal() {
             var total = 0;
-            for (var i = 1; i < nbOpt + 1; i++)
+            for (var i = 1; i < nbOpt; i++)
             {
-                total += parseInt(document.getElementById("total" + i).textContent);
+                var QtTotal = document.getElementById("total" + i).textContent;
+                total += parseInt(QtTotal);
             }
 
             var distance = document.getElementById("distance").value;
